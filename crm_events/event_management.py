@@ -3,12 +3,14 @@ from epic_auth_app.models import Utilisateur
 from prettytable import PrettyTable
 from epic_contracts_app.models import Contrat
 from datetime import datetime
+from django.utils import timezone
 
 
 def create_event(current_user):
     # Vérifier si l'utilisateur est autorisé
     if current_user.department not in ['COM', 'ADM']:
-        print("Accès refusé. Seuls les utilisateurs des départements GES et ADM peuvent créer des événements.")
+        print("\033[91mAccès refusé. Seuls les utilisateurs des départements "
+              "GES et ADM peuvent créer des événements.\033[0m")
         return
 
     # Demander des informations sur l'événement
@@ -89,40 +91,51 @@ def list_events(current_user):
 
 
 def update_event(current_user):
-    # Vérifier si l'utilisateur est autorisé
+    print(f"Utilisateur actuel: {current_user.email}, Département: {current_user.department}")
     if current_user.department not in ['GES', 'SUP', 'ADM']:
         print("Accès refusé. Seuls les utilisateurs des départements GES et ADM peuvent modifier des événements.")
         return
 
-    # Demander l'ID de l'événement à modifier
-    event_id = input("Entrez l'ID de l'événement à modifier : ")
+    print("Événements disponibles dans la base de données :")
+    for event in Evenement.objects.all():
+        print(f"ID: {event.id}, Nom: {event.nom}")
 
-    # Trouver l'événement associé
+    event_id = input("Entrez l'ID de l'événement à modifier : ")
+    print(f"ID d'événement reçu: {event_id}")
+
     try:
         evenement = Evenement.objects.get(id=event_id)
+        print(f"Événement trouvé: {evenement.nom}")
     except Evenement.DoesNotExist:
         print("Événement non trouvé.")
         return
 
-    # Demander de nouvelles informations
     nom = input("Entrez le nouveau nom de l'événement (laissez vide pour ne pas changer) : ")
+    if nom:
+        print(f"Mise à jour du nom: {nom}")
+        evenement.nom = nom
+
     date_debut_str = input(
         "Entrez la nouvelle date de début (format YYYY-MM-DD HH:MM, laissez vide pour ne pas changer) : "
     )
-    date_fin_str = input("Entrez la nouvelle date de fin (format YYYY-MM-DD HH:MM, laissez vide pour ne pas changer) : ")
-    lieu = input("Entrez le nouveau lieu de l'événement (laissez vide pour ne pas changer) : ")
-    type_evenement = input("Entrez le nouveau type de l'événement (laissez vide pour ne pas changer) : ")
 
-    # Mettre à jour l'événement
-    if nom:
-        evenement.nom = nom
     if date_debut_str:
-        evenement.date_debut = datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M')
+        evenement.date_debut = timezone.datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M')
+        print(f"Nouvelle date de début: {evenement.date_debut}")
+
+    date_fin_str = input("Entrez la nouvelle date de fin (format YYYY-MM-DD HH:MM, laissez vide pour ne pas changer) : ")
     if date_fin_str:
-        evenement.date_fin = datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M')
+        evenement.date_fin = timezone.datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M')
+        print(f"Nouvelle date de fin: {evenement.date_fin}")
+
+    lieu = input("Entrez le nouveau lieu de l'événement (laissez vide pour ne pas changer) : ")
     if lieu:
+        print(f"Nouveau lieu: {lieu}")
         evenement.lieu = lieu
+
+    type_evenement = input("Entrez le nouveau type de l'événement (laissez vide pour ne pas changer) : ")
     if type_evenement:
+        print(f"Nouveau type d'événement: {type_evenement}")
         evenement.type_evenement = type_evenement
 
     evenement.save()

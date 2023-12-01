@@ -1,0 +1,73 @@
+from django.test import TestCase
+from unittest.mock import patch
+from epic_auth_app.models import Utilisateur
+from epic_events_app.models import Evenement
+from epic_clients_app.models import Client
+from epic_contracts_app.models import Contrat
+from datetime import timedelta
+from django.utils import timezone
+from event_management import update_event
+
+
+class UpdateEventTest(TestCase):
+    def setUp(self):
+        # Création des utilisateurs
+        self.user_ges = Utilisateur.objects.create_user(email='ges@example.com', password='testpass', department='GES')
+        self.user_adm = Utilisateur.objects.create_user(email='adm@example.com', password='testpass', department='ADM')
+        self.user_com = Utilisateur.objects.create_user(email='com@example.com', password='testpass', department='COM')
+
+        # Création d'un client
+        self.client = Client.objects.create(
+            full_name='Client Test',
+            email='client@example.com',
+            phone_number='0123456789',
+            company_name='Entreprise Test',
+            sales_contact=self.user_com
+        )
+
+        # Création d'un contrat
+        self.contrat = Contrat.objects.create(
+            nom='Contrat Test',
+            montant_total=1000,
+            montant_restant=500,
+            date_creation=timezone.now(),
+            statut='ACTIF',
+            client=self.client
+        )
+
+        # Création d'un événement
+        self.event = Evenement.objects.create(
+            nom='Événement Test',
+            date_debut=timezone.now(),
+            date_fin=timezone.now() + timedelta(days=1),
+            lieu='Lieu Test',
+            type_evenement='Type Test',
+            statut='PL',
+            contrat=self.contrat,
+            gestionnaire=self.user_ges
+        )
+
+    @patch('builtins.input', side_effect=['1', 'Événement Modifié', '', '', '', ''])
+    def test_update_event_success(self, mock_input):
+        # Simuler une mise à jour réussie par un utilisateur autorisé
+        update_event(self.user_ges)
+        updated_event = Evenement.objects.get(id=1)
+        self.assertEqual(updated_event.nom, 'Événement Modifié')
+        mock_input.assert_any_call('1')
+        mock_input.assert_any_call('Événement Modifié')
+
+    @patch('builtins.input', side_effect=['1', 'Événement Modifié', '', '', '', ''])
+    @patch('builtins.print')
+    def test_update_event_unauthorized_user(self, mock_print, mock_input):
+        # Tester le refus de modification pour un utilisateur non autorisé
+        update_event(self.user_com)
+        mock_print.assert_called_with(
+            "Accès refusé. Seuls les utilisateurs des départements GES et ADM peuvent modifier des événements."
+        )
+
+    @patch('builtins.input', side_effect=['999', '', '', '', '', ''])
+    @patch('builtins.print')
+    def test_update_event_non_existent(self, mock_print, mock_input):
+        # Tester le comportement lorsque l'événement spécifié n'existe pas
+        update_event(self.user_ges)
+        mock_print.assert_called_with("Événement non trouvé.")

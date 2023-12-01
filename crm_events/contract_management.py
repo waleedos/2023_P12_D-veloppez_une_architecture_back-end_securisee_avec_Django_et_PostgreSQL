@@ -21,7 +21,7 @@ def create_contrat(current_user):
     client_id = input("Entrez l'ID du client pour le contrat : ")
     montant_total = input("Entrez le montant total du contrat : ")
     montant_restant = input("Entrez le montant restant : ")
-    date_creation = input("Entrez la date de création du contrat (format YYYY-MM-DD HH:MM) : ")
+    date_creation_str = input("Entrez la date de création du contrat (format YYYY-MM-DD HH:MM) : ")
     statut_abrev = input("Entrez le statut du contrat (ACT pour Actif, TER pour Terminé, ATT pour En Attente) : ")
 
     # Convertir les abréviations en statuts complets
@@ -30,6 +30,10 @@ def create_contrat(current_user):
         'TER': 'TERMINE',
         'ATT': 'EN_ATTENTE'
     }.get(statut_abrev.upper(), 'EN_ATTENTE')
+
+    # Convertir la chaîne de date en objet datetime et la rendre "consciente" du fuseau horaire
+    naive_date_creation = timezone.datetime.strptime(date_creation_str, "%Y-%m-%d %H:%M")
+    aware_date_creation = timezone.make_aware(naive_date_creation)
 
     # Création du contrat
     try:
@@ -40,7 +44,7 @@ def create_contrat(current_user):
             sales_contact=current_user,
             montant_total=montant_total,
             montant_restant=montant_restant,
-            date_creation=timezone.datetime.strptime(date_creation, "%Y-%m-%d %H:%M"),
+            date_creation=aware_date_creation,
             statut=statut_contrat
         )
         new_contrat.save()

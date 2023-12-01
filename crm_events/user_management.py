@@ -88,8 +88,8 @@ def create_user():
         print("\033[91mVous devez être connecté pour créer un utilisateur.\033[0m\n")
         return
 
-    if not current_authenticated_user.is_superuser and current_authenticated_user.department != 'ADM':
-        print("\033[91mVous n'avez pas le niveau d'accréditation ADM pour pouvoir créer un utilisateur.\033[0m\n")
+    if not current_authenticated_user.is_superuser and current_authenticated_user.department not in ['ADM', 'GES']:
+        print("\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir créer un utilisateur.\033[0m\n")
         return
 
     email = input_with_prompt("Entrez l'email du nouvel utilisateur : ")
@@ -128,8 +128,8 @@ def update_user(current_user, user_to_update_email, new_email=None,
         print("\033[91mAucun utilisateur trouvé avec cet email.\033[0m")
         return
 
-    if not current_user.is_superuser and current_user.email != user_to_update.email:
-        print("\033[91mVous n'avez pas les permissions.\033[0m\n")
+    if not current_user.is_superuser and current_user.department not in ['ADM', 'GES']:
+        print("\033[91mVous n'avez pas les permissions requises des départements ADM ou GES.\033[0m\n")
         return
 
     # Si les arguments ne sont pas fournis, demander à l'utilisateur
@@ -253,9 +253,9 @@ def delete_user(requesting_user_email, user_to_delete_email):
     user_to_delete = Utilisateur.objects.get(email=user_to_delete_email)
 
     # Vérifier si l'utilisateur qui fait la demande a les permissions nécessaires
-    if not (requesting_user.is_superuser or requesting_user.department == 'ADM'):
+    if not (requesting_user.is_superuser or requesting_user.department in ['ADM', 'GES']):
         raise PermissionDenied(
-            "\033[91mVous n'avez pas le niveau d'accréditation (ADM), nécessaires pour supprimer cet utilisateur.\n"
+            "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire pour supprimer cet utilisateur.\n"
         )
 
     # Supprimer l'utilisateur

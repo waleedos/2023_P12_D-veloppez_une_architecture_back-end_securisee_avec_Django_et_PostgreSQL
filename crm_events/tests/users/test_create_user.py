@@ -27,7 +27,7 @@ def test_create_user_permission_denied(capfd):
 
     create_user()
     out, err = capfd.readouterr()
-    assert "Vous n'avez pas le niveau d'accréditation ADM pour pouvoir créer un utilisateur." in out
+    assert "Vous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir créer un utilisateur." in out
 
 
 @pytest.mark.django_db
