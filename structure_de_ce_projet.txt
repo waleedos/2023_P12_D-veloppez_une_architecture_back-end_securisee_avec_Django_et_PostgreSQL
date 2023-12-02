@@ -1,0 +1,77 @@
+.
+├── crm_events
+│   ├── client_management.py
+│   ├── contract_management.py
+│   ├── crm_events
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── epic_auth_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── management
+│   │   │   └── createadmin.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── epic_clients_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── epic_contracts_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── epic_events_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── event_management.py
+│   ├── main.py
+│   ├── manage.py
+│   ├── pytest.ini
+│   ├── tests
+│   │   ├── clients
+│   │   │   ├── test_add_client.py
+│   │   │   ├── test_delete_client.py
+│   │   │   ├── test_get_client_by_id.py
+│   │   │   ├── test_is_valid_email.py
+│   │   │   ├── test_list_clients.py
+│   │   │   └── test_update_client.py
+│   │   ├── contrats
+│   │   │   ├── test_create_contrat.py
+│   │   │   ├── test_delete_contrat.py
+│   │   │   ├── test_gerer_contrats.py
+│   │   │   ├── test_list_contrats.py
+│   │   │   ├── test_reassign_contrat.py
+│   │   │   └── test_update_contrat.py
+│   │   ├── events
+│   │   │   ├── 111test_update_event.111
+│   │   │   ├── test_create_event.py
+│   │   │   └── test_list_events.py
+│   │   └── users
+│   │       ├── test_create_user.py
+│   │       ├── test_delete_user.py
+│   │       ├── test_gerer_utilisateurs.py
+│   │       ├── test_get_current_user.py
+│   │       ├── test_list_users.py
+│   │       ├── test_login.py
+│   │       ├── test_logout.py
+│   │       ├── test_reassign_user.py
+│   │       ├── test_signup.py
+│   │       ├── test_update_user.py
+│   │       ├── test_validate_and_create_user.py
+│   │       └── test_validate_password_strength.py
+│   ├── user_management.py
+│   └── utils.py
+├── requirements.txt
+└── structure_de_ce_projet.txt
+
+12 directories, 62 files

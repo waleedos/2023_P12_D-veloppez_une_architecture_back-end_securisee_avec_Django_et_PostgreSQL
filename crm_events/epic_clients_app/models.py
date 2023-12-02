@@ -4,9 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from epic_auth_app.models import Utilisateur
 
 
-# Modèle Client
 class Client(models.Model):
-    # Enumération pour les rôles
     class Role(models.TextChoices):
         PROSPECT = 'PR', _('Prospect')
         CLIENT = 'CL', _('Client')
@@ -21,10 +19,20 @@ class Client(models.Model):
         Utilisateur,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='clients',
+        related_name='clients_commercial',
         verbose_name=_('contact commercial chez Epic Events')
     )
     role = models.CharField(_('rôle'), max_length=2, choices=Role.choices, default=Role.PROSPECT)
+
+    # Nouveau champ pour le commercial assigné
+    commercial_assigne = models.ForeignKey(
+        Utilisateur,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='clients_assignes',
+        verbose_name=_('Commercial Assigné')
+    )
 
     def __str__(self):
         return self.full_name

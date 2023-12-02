@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 from prettytable import PrettyTable
+from epic_auth_app.models import Utilisateur
 
 # Configuration de l'environnement Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crm_events.settings')
@@ -26,8 +27,7 @@ def gerer_clients(current_user):
         print("1. Afficher tous les Clients")
         print("2. Ajouter un nouveau Client")
         print("3. Modifier un Client")
-        print("4. Supprimer un Client")
-        print("5. Revenir au menu précédent\n")
+        print("4. Revenir au menu précédent\n")
 
         choix_client = input("\033[96mChoisissez une action: \033[0m")
 
@@ -38,8 +38,6 @@ def gerer_clients(current_user):
         elif choix_client == '3':
             update_client(current_user)  # Logique pour modifier un client
         elif choix_client == '4':
-            delete_client(current_user)  # Logique pour supprimer un client
-        elif choix_client == '5':
             break  # Sortir de la boucle pour revenir au menu principal
         else:
             print("\033[91mChoix invalide. Veuillez réessayer.\033[0m")
@@ -83,11 +81,13 @@ def add_client(current_user):
         print("Le nom de l'entreprise ne peut pas être vide.")
         return
 
+    # Création du client avec le commercial assigné
     client = Client(
         full_name=full_name,
         email=email,
         phone_number=phone_number,
         company_name=company_name,
+        commercial_assigne=current_user,  # Assignation du commercial actuel
         created_at=timezone.now(),
         updated_at=timezone.now()
     )
@@ -98,19 +98,21 @@ def add_client(current_user):
 def list_clients():
     clients = Client.objects.all()
     table = PrettyTable()
-    table.field_names = [" ID ", " Nom ", " Email ", " Téléphone ", " Entreprise "]
+    table.field_names = [" ID ", " Nom ", " Email ", " Téléphone ", " Entreprise ", " Commercial Assigné "]
     table.border = False
     table.header = True  # Activer l'affichage des en-têtes
     table.align = 'l'
 
     # Ajout des lignes de clients au tableau
     for client in clients:
+        commercial_assigne = client.commercial_assigne.get_full_name() if client.commercial_assigne else 'Non Assigné'
         table.add_row([
             " " + str(client.id) + " ",
             " " + client.full_name + " ",
             " " + client.email + " ",
             " " + client.phone_number + " ",
             " " + client.company_name + " ",
+            " " + commercial_assigne + " ",
         ])
 
     # Calcul de la largeur maximale pour l'affichage
@@ -127,53 +129,48 @@ def list_clients():
 
 
 def update_client(current_user):
-    print(f"Current user department: {current_user.department if current_user else 'None'}")  # Ajouter pour le débogage
-    if not current_user or current_user.department not in ['COM', 'SUP', 'GES']:
-        print("\033[91mAccès refusé. Vous n'avez pas les permissions nécessaires.\033[0m")
+    print(f"Current user department: {current_user.department if current_user else 'None'}")
+    if not current_user or current_user.department not in ['COM', 'ADM']:
+        print("\n\033[91mAccès refusé. Vous n'avez pas les permissions nécessaires.\033\n[0m")
         return
 
-    list_clients()
-    client = get_client_by_id()
-    if client:
-        new_full_name = input("Enter new full name (leave blank to not change): ").strip()
-        new_email = input("Enter new email (leave blank to not change): ").strip()
-        new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
-        new_company_name = input("Enter new company name (leave blank to not change): ").strip()
+    list_clients()  # Afficher la liste des clients avec la colonne commercial assigné
+    client_id = input("Enter the ID of the client to update: ").strip()
 
-        if new_full_name:
-            client.full_name = new_full_name
-        if new_email and is_valid_email(new_email):
-            client.email = new_email
-        elif new_email:
-            print("Invalid email format.")
+    try:
+        client = Client.objects.get(id=client_id)
+    except Client.DoesNotExist:
+        print("\n\033[91mClient not found.\033\n[0m")
+        return
+
+    new_full_name = input("Enter new full name (leave blank to not change): ").strip()
+    new_email = input("Enter new email (leave blank to not change): ").strip()
+    new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
+    new_company_name = input("Enter new company name (leave blank to not change): ").strip()
+    new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
+
+    # Mise à jour des champs du client
+    if new_full_name:
+        client.full_name = new_full_name
+    if new_email and is_valid_email(new_email):
+        client.email = new_email
+    elif new_email:
+        print("Invalid email format.")
+        return
+    if new_phone_number:
+        client.phone_number = new_phone_number
+    if new_company_name:
+        client.company_name = new_company_name
+
+    # Mise à jour du commercial assigné si nécessaire
+    if new_commercial_assigne_id:
+        try:
+            new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
+            client.commercial_assigne = new_commercial
+        except Utilisateur.DoesNotExist:
+            print("Commercial not found.")
             return
-        if new_phone_number:
-            client.phone_number = new_phone_number
-        if new_company_name:
-            client.company_name = new_company_name
 
-        client.updated_at = timezone.now()
-        client.save()
-        print(f"Client {client.full_name} updated successfully.")
-    else:
-        print("Update cancelled.")
-
-
-def delete_client(current_user):
-    # Vérifier les permissions de l'utilisateur
-    if not current_user or current_user.department not in ['COM', 'SUP', 'GES']:
-        print("\033[91mAccès refusé.\n")
-        print("Seuls les membres des équipes commerciale, support ou management peuvent supprimer des clients.\033[0m")
-        return
-
-    list_clients()  # Afficher la liste des clients
-    client = get_client_by_id()
-    if client:
-        confirm = input(f"Are you sure you want to delete {client.full_name}? (yes/no): ")
-        if confirm.lower() == 'yes':
-            client.delete()
-            print("\033[92mClient deleted successfully.\033[0m")
-        else:
-            print("Deletion cancelled.")
-    else:
-        print("Deletion cancelled.")
+    client.updated_at = timezone.now()
+    client.save()
+    print(f"\n\033[92mClient {client.full_name} updated successfully.\033[0m")

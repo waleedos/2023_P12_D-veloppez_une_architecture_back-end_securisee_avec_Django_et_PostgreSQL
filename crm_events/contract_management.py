@@ -65,20 +65,21 @@ def list_contrats(current_user):
         if contrats.exists():
             table = PrettyTable()
             table.field_names = [
-                "ID",
-                "Nom",
-                "Client",
-                "Montant Total",
-                "Montant Restant",
-                "Date de Création",
-                "Statut",
-                "Géré par (Dpt Gestion)"
+                " ID ",
+                " Nom ",
+                " Client ",
+                " Montant Total ",
+                " Montant Restant ",
+                " Date de Création ",
+                " Statut ",
+                " Client géré par (COM) "  # Titre de la dernière colonne modifié
             ]
             table.border = False
-            table.header = True
+            table.header = True  # Activer l'affichage des en-têtes
             table.align = 'l'
 
             for contrat in contrats:
+                commercial_assigne = contrat.client.commercial_assigne.get_full_name() if contrat.client.commercial_assigne else 'N/A'
                 table.add_row([
                     " " + str(contrat.id) + " ",
                     " " + contrat.nom + " ",
@@ -87,7 +88,7 @@ def list_contrats(current_user):
                     " " + str(contrat.montant_restant) + " ",
                     " " + contrat.date_creation.strftime('%Y-%m-%d %H:%M') + " ",
                     " " + contrat.statut + " ",
-                    " " + (contrat.sales_contact.email if contrat.sales_contact else 'N/A') + " "
+                    " " + commercial_assigne + " "  # Afficher le commercial assigné
                 ])
 
             # Calcul de la largeur maximale pour l'affichage

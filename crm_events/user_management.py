@@ -219,7 +219,8 @@ def signup():
 def list_users():
     users = Utilisateur.objects.all().order_by('department')
     table = PrettyTable()
-    table.field_names = [" Email ", " First Name ", " Last Name ", " Department ", " Is Superuser "]
+    # Ajout de la colonne "ID" dans les en-têtes
+    table.field_names = [" ID ", " Email ", " First Name ", " Last Name ", " Department ", " Is Superuser "]
     table.border = False
     table.header = True  # Activer l'affichage des en-têtes
     table.align = 'l'
@@ -227,6 +228,7 @@ def list_users():
     # Ajout des lignes d'utilisateurs au tableau
     for user in users:
         table.add_row([
+            " " + str(user.id) + " ",  # Ajout de l'ID de l'utilisateur
             " " + user.email + " ",
             " " + user.first_name + " ",
             " " + user.last_name + " ",
