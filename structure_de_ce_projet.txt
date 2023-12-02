@@ -40,7 +40,6 @@
 │   ├── tests
 │   │   ├── clients
 │   │   │   ├── test_add_client.py
-│   │   │   ├── test_delete_client.py
 │   │   │   ├── test_get_client_by_id.py
 │   │   │   ├── test_is_valid_email.py
 │   │   │   ├── test_list_clients.py
@@ -49,11 +48,9 @@
 │   │   │   ├── test_create_contrat.py
 │   │   │   ├── test_delete_contrat.py
 │   │   │   ├── test_gerer_contrats.py
-│   │   │   ├── test_list_contrats.py
 │   │   │   ├── test_reassign_contrat.py
 │   │   │   └── test_update_contrat.py
 │   │   ├── events
-│   │   │   ├── 111test_update_event.111
 │   │   │   ├── test_create_event.py
 │   │   │   └── test_list_events.py
 │   │   └── users
@@ -74,4 +71,4 @@
 ├── requirements.txt
 └── structure_de_ce_projet.txt
 
-12 directories, 62 files
+12 directories, 59 files

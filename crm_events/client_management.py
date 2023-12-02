@@ -1,4 +1,5 @@
 import os
+import re
 import django
 from django.utils import timezone
 from django.core.validators import EmailValidator
@@ -40,7 +41,7 @@ def gerer_clients(current_user):
         elif choix_client == '4':
             break  # Sortir de la boucle pour revenir au menu principal
         else:
-            print("\033[91mChoix invalide. Veuillez réessayer.\033[0m")
+            print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
 
 
 def get_client_by_id():
@@ -57,42 +58,56 @@ def get_client_by_id():
                 return None
 
 
+def validate_name(name):
+    if not re.fullmatch(r'^[A-Za-z\s]+$', name):
+        raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
+
+
+def validate_email(email):
+    if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+        raise ValueError("Format d'email invalide.")
+
+
+def validate_phone_number(phone_number):
+    if not re.fullmatch(r'^\+?[\d\s]{10,15}$', phone_number):
+        raise ValueError("\n\033[91mFormat de numéro de téléphone invalide.\033[0m")
+
+
 def add_client(current_user):
     if not current_user or current_user.department != 'COM':
         print("\033[91mAccès refusé. Seuls les membres de l'équipe commerciale peuvent ajouter des clients.\033[0m")
         return
 
-    full_name = input("Enter full name: ").strip()
-    email = input("Enter email: ").strip()
-    phone_number = input("Enter phone number: ").strip()
-    company_name = input("Enter company name: ").strip()
+    try:
+        full_name = input("Enter full name: ").strip()
+        email = input("Enter email: ").strip()
+        phone_number = input("Enter phone number: ").strip()
+        company_name = input("Enter company name: ").strip()
 
-    # Validation des champs
-    if not full_name:
-        print("Le nom complet ne peut pas être vide.")
-        return
-    if not is_valid_email(email):
-        print("Invalid email format.")
-        return
-    if not phone_number:
-        print("Le numéro de téléphone ne peut pas être vide.")
-        return
-    if not company_name:
-        print("Le nom de l'entreprise ne peut pas être vide.")
-        return
+        # Appliquer les validations
+        validate_name(full_name)
+        validate_email(email)
+        validate_phone_number(phone_number)
 
-    # Création du client avec le commercial assigné
-    client = Client(
-        full_name=full_name,
-        email=email,
-        phone_number=phone_number,
-        company_name=company_name,
-        commercial_assigne=current_user,  # Assignation du commercial actuel
-        created_at=timezone.now(),
-        updated_at=timezone.now()
-    )
-    client.save()
-    print(f"\033[92mClient {full_name} added successfully.\033[0m")
+        if not company_name:
+            print("Le nom de l'entreprise ne peut pas être vide.")
+            return
+
+        # Création du client avec le commercial assigné
+        client = Client(
+            full_name=full_name,
+            email=email,
+            phone_number=phone_number,
+            company_name=company_name,
+            commercial_assigne=current_user,
+            created_at=timezone.now(),
+            updated_at=timezone.now()
+        )
+        client.save()
+        print(f"\033[92mClient {full_name} added successfully.\033[0m")
+
+    except ValueError as e:
+        print(e)
 
 
 def list_clients():
@@ -143,34 +158,39 @@ def update_client(current_user):
         print("\n\033[91mClient not found.\033\n[0m")
         return
 
-    new_full_name = input("Enter new full name (leave blank to not change): ").strip()
-    new_email = input("Enter new email (leave blank to not change): ").strip()
-    new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
-    new_company_name = input("Enter new company name (leave blank to not change): ").strip()
-    new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
-
-    # Mise à jour des champs du client
-    if new_full_name:
-        client.full_name = new_full_name
-    if new_email and is_valid_email(new_email):
-        client.email = new_email
-    elif new_email:
-        print("Invalid email format.")
-        return
-    if new_phone_number:
-        client.phone_number = new_phone_number
-    if new_company_name:
-        client.company_name = new_company_name
-
-    # Mise à jour du commercial assigné si nécessaire
-    if new_commercial_assigne_id:
+    while True:
         try:
-            new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
-            client.commercial_assigne = new_commercial
+            new_full_name = input("Enter new full name (leave blank to not change): ").strip()
+            new_email = input("Enter new email (leave blank to not change): ").strip()
+            new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
+            new_company_name = input("Enter new company name (leave blank to not change): ").strip()
+            new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
+
+            # Appliquer les validations
+            if new_full_name:
+                validate_name(new_full_name)
+                client.full_name = new_full_name
+            if new_email:
+                validate_email(new_email)
+                client.email = new_email
+            if new_phone_number:
+                validate_phone_number(new_phone_number)
+                client.phone_number = new_phone_number
+            if new_company_name:
+                client.company_name = new_company_name
+
+            # Mise à jour du commercial assigné si nécessaire
+            if new_commercial_assigne_id:
+                new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
+                client.commercial_assigne = new_commercial
+
+            client.updated_at = timezone.now()
+            client.save()
+            print(f"\n\033[92mClient {client.full_name} updated successfully.\033[0m")
+            break  # Sortie de la boucle après succès
+
+        except ValueError as e:
+            print(e)  # Affiche l'erreur et redemande les données
         except Utilisateur.DoesNotExist:
             print("Commercial not found.")
-            return
-
-    client.updated_at = timezone.now()
-    client.save()
-    print(f"\n\033[92mClient {client.full_name} updated successfully.\033[0m")
+            continue  # Demande à nouveau les données

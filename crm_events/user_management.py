@@ -1,12 +1,11 @@
 import os
+import re
 import django
 from django.conf import settings  # Importer les settings de Django
 from django.contrib.auth import authenticate
 from epic_auth_app.models import Utilisateur
 from django.core.exceptions import ValidationError, PermissionDenied
-from django.core.validators import validate_email
 from prettytable import PrettyTable
-import re
 import jwt
 
 # Configuration de l'environnement Django
@@ -49,7 +48,7 @@ def gerer_utilisateurs(current_authenticated_user):
         elif user_action == '6':
             break
         else:
-            print("\033[91mChoix invalide. Veuillez réessayer.\033[0m")
+            print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
 
 
 def validate_password_strength(password):
@@ -81,6 +80,21 @@ def validate_and_create_user(email, password, first_name, last_name, phone_numbe
         return None
 
 
+def validate_name(name):
+    if not re.fullmatch(r'^[A-Za-z\s]+$', name):
+        raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
+
+
+def validate_email(email):
+    if not re.fullmatch(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
+        raise ValueError("Format d'email invalide.")
+
+
+def validate_phone_number(phone_number):
+    if not re.fullmatch(r'^\+?[\d\s]{10,15}$', phone_number):
+        raise ValueError("Format de numéro de téléphone invalide.")
+
+
 def create_user():
     global current_authenticated_user
 
@@ -92,14 +106,22 @@ def create_user():
         print("\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir créer un utilisateur.\033[0m\n")
         return
 
-    email = input_with_prompt("Entrez l'email du nouvel utilisateur : ")
-    password = input_with_prompt("Entrez le mot de passe du nouvel utilisateur : ")
-    first_name = input_with_prompt("Entrez le prénom du nouvel utilisateur : ")
-    last_name = input_with_prompt("Entrez le nom de famille du nouvel utilisateur : ")
-    phone_number = input_with_prompt("Entrez le numéro de téléphone du nouvel utilisateur : ")
-    department = input_with_prompt("Entrez le département du nouvel utilisateur (COM/SUP/GES/ADM/TST) : ")
-
-    validate_and_create_user(email, password, first_name, last_name, phone_number, department)
+    while True:
+        try:
+            email = input_with_prompt("Entrez l'email du nouvel utilisateur : ")
+            validate_email(email)
+            password = input_with_prompt("Entrez le mot de passe du nouvel utilisateur : ")
+            first_name = input_with_prompt("Entrez le prénom du nouvel utilisateur : ")
+            validate_name(first_name)
+            last_name = input_with_prompt("Entrez le nom de famille du nouvel utilisateur : ")
+            validate_name(last_name)
+            phone_number = input_with_prompt("Entrez le numéro de téléphone du nouvel utilisateur : ")
+            validate_phone_number(phone_number)
+            department = input_with_prompt("Entrez le département du nouvel utilisateur (COM/SUP/GES/ADM/TST) : ")
+            validate_and_create_user(email, password, first_name, last_name, phone_number, department)
+            break
+        except ValueError as e:
+            print(f"\033[91mErreur de validation : {e}\033[0m")
 
 
 def authenticate_superuser():
@@ -116,8 +138,7 @@ def authenticate_superuser():
     return user.is_superuser if user else False
 
 
-def update_user(current_user, user_to_update_email, new_email=None,
-                new_first_name=None, new_last_name=None, new_phone=None):
+def update_user(current_user, user_to_update_email):
     if not current_user:
         print("\033[91mAuthentification requise.\033[0m")
         return
@@ -132,25 +153,27 @@ def update_user(current_user, user_to_update_email, new_email=None,
         print("\033[91mVous n'avez pas les permissions requises des départements ADM ou GES.\033[0m\n")
         return
 
-    # Si les arguments ne sont pas fournis, demander à l'utilisateur
-    if new_email is None:
-        new_email = input("Entrez le nouvel email (laissez vide pour ne pas changer) : ").strip()
-    if new_first_name is None:
-        new_first_name = input("Entrez le nouveau prénom (laissez vide pour ne pas changer) : ").strip()
-    if new_last_name is None:
-        new_last_name = input("Entrez le nouveau nom de famille (laissez vide pour ne pas changer) : ").strip()
-    if new_phone is None:
-        new_phone = input("Entrez le nouveau numéro de téléphone (laissez vide pour ne pas changer) : ").strip()
-
-    # Mise à jour des informations de l'utilisateur
-    if new_email:
-        user_to_update.email = new_email
-    if new_first_name:
-        user_to_update.first_name = new_first_name
-    if new_last_name:
-        user_to_update.last_name = new_last_name
-    if new_phone:
-        user_to_update.phone = new_phone
+    while True:
+        try:
+            new_email = input("Entrez le nouvel email (laissez vide pour ne pas changer) : ").strip()
+            if new_email:
+                validate_email(new_email)
+                user_to_update.email = new_email
+            new_first_name = input("Entrez le nouveau prénom (laissez vide pour ne pas changer) : ").strip()
+            if new_first_name:
+                validate_name(new_first_name)
+                user_to_update.first_name = new_first_name
+            new_last_name = input("Entrez le nouveau nom de famille (laissez vide pour ne pas changer) : ").strip()
+            if new_last_name:
+                validate_name(new_last_name)
+                user_to_update.last_name = new_last_name
+            new_phone = input("Entrez le nouveau numéro de téléphone (laissez vide pour ne pas changer) : ").strip()
+            if new_phone:
+                validate_phone_number(new_phone)
+                user_to_update.phone = new_phone
+            break
+        except ValueError as e:
+            print(f"\033[91mErreur de validation : {e}\033[0m")
 
     user_to_update.save()
     print("\033[92mUtilisateur mis à jour.\033[0m\n")
@@ -177,13 +200,13 @@ def login(email=None, password=None, show_token=True):
 
     if user is not None:
         current_authenticated_user = user  # Mettre à jour la variable globale
-        print("\033[92mUtilisateur authentifié avec succès\033[0m\n")
+        print("\n\033[92mUtilisateur authentifié avec succès\033[0m\n")
         token = jwt.encode({'email': user.email}, settings.JWT_SECRET_KEY, algorithm='HS256')
         if show_token:
             print(f"Token JWT généré : {token}")
         return user
     else:
-        print("\033[91mÉchec de l'authentification pour l'utilisateur\033[0m")
+        print("\033\n[91mÉchec de l'authentification pour l'utilisateur\033\n[0m")
         return None
 
 
@@ -191,29 +214,6 @@ def logout():
     global current_authenticated_user
     current_authenticated_user = None
     print("\033[92mVous êtes maintenant déconnecté\033[0m\n")
-
-
-def signup():
-    email = input("Entrez votre email : ")
-    password = input("Créez un mot de passe : ")
-    first_name = input("Entrez votre prénom : ")
-    last_name = input("Entrez votre nom de famille : ")
-    department = input("Entrez votre département (COM/SUP/GES) : ")
-
-    try:
-        validate_email(email)
-        Utilisateur.objects.create_user(
-            email=email,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            department=department
-        )
-        print(f"\033[92mCompte créé pour {email}\033[0m\n")
-    except ValidationError:
-        print("\033[91mFormat d'email invalide.\033[0m")
-    except Exception as e:
-        print(f"\033[91mErreur lors de la création du compte : {e}\033[0m\n")
 
 
 def list_users():
@@ -265,6 +265,12 @@ def delete_user(requesting_user_email, user_to_delete_email):
     print(f"\033[92mUtilisateur {user_to_delete_email} supprimé avec succès.\033[0m\n")
 
 
+def validate_department(department):
+    valid_departments = ['COM', 'SUP', 'GES', 'ADM', 'TST']
+    if department not in valid_departments:
+        raise ValueError(f"Département invalide. Les départements valides sont : {', '.join(valid_departments)}.")
+
+
 def reassign_user(email, new_department, current_user_email):
     try:
         current_user = Utilisateur.objects.get(email=current_user_email)
@@ -274,10 +280,13 @@ def reassign_user(email, new_department, current_user_email):
             return
 
         user = Utilisateur.objects.get(email=email)
+        validate_department(new_department)  # Valider le nouveau département
         user.department = new_department
         user.save()
         print(f"\033[92mUtilisateur {email} ré-affecté au département {new_department}.\033[0m\n")
     except Utilisateur.DoesNotExist:
         print("\033[91mAucun utilisateur trouvé avec cet email.\033[0m\n")
+    except ValueError as e:
+        print(f"\033[91mErreur de validation : {e}\033[0m")
     except Exception as e:
         print(f"Erreur lors de la ré-affectation de l'utilisateur : {e}")

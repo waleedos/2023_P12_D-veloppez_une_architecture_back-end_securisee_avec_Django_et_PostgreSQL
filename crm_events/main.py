@@ -61,7 +61,7 @@ def main_menu():
             print("Au revoir !")
             break
         else:
-            print("Choix invalide. Veuillez réessayer.")
+            print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
 
 
 if __name__ == "__main__":

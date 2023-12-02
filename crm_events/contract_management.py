@@ -1,3 +1,4 @@
+import re
 from epic_contracts_app.models import Contrat
 from epic_clients_app.models import Client
 from epic_auth_app.models import Utilisateur
@@ -7,52 +8,59 @@ from django.utils import timezone
 from prettytable import PrettyTable
 
 
+def validate_contract_name(name):
+    if not re.fullmatch(r'^[A-Za-z\s]+$', name):
+        raise ValueError("Le nom du contrat doit contenir uniquement des caractères alphabétiques et des espaces.")
+
+
+def validate_amount(amount):
+    if not re.fullmatch(r'^\d+(\.\d{1,2})?$', amount):
+        raise ValueError("Le montant doit être un nombre valide avec au maximum deux décimales.")
+
+
+def validate_date(date_str):
+    try:
+        return timezone.make_aware(timezone.datetime.strptime(date_str, "%Y-%m-%d %H:%M"))
+    except ValueError:
+        raise ValueError("Format de date invalide. Utilisez le format YYYY-MM-DD HH:MM.")
+
+
 def create_contrat(current_user):
     if current_user.department not in ['GES', 'ADM']:
         print("\033[91mSeuls les membres des équipes de gestion ou d'administration peuvent créer des contrats.\033[0m\n")
         return
 
-    # Afficher la liste des clients
     print("\033[93mVoici la liste de tous nos clients.\033[0m")
     list_clients()
 
-    # Collecter les informations du contrat
-    nom_contrat = input("Entrez le nom du contrat : ")
-    client_id = input("Entrez l'ID du client pour le contrat : ")
-    montant_total = input("Entrez le montant total du contrat : ")
-    montant_restant = input("Entrez le montant restant : ")
-    date_creation_str = input("Entrez la date de création du contrat (format YYYY-MM-DD HH:MM) : ")
-    statut_abrev = input("Entrez le statut du contrat (ACT pour Actif, TER pour Terminé, ATT pour En Attente) : ")
-
-    # Convertir les abréviations en statuts complets
-    statut_contrat = {
-        'ACT': 'ACTIF',
-        'TER': 'TERMINE',
-        'ATT': 'EN_ATTENTE'
-    }.get(statut_abrev.upper(), 'EN_ATTENTE')
-
-    # Convertir la chaîne de date en objet datetime et la rendre "consciente" du fuseau horaire
-    naive_date_creation = timezone.datetime.strptime(date_creation_str, "%Y-%m-%d %H:%M")
-    aware_date_creation = timezone.make_aware(naive_date_creation)
-
-    # Création du contrat
     try:
+        nom_contrat = input("Entrez le nom du contrat : ")
+        validate_contract_name(nom_contrat)
+
+        client_id = input("Entrez l'ID du client pour le contrat : ")
+
+        montant_total = input("Entrez le montant total du contrat : ")
+        validate_amount(montant_total)
+
+        montant_restant = input("Entrez le montant restant : ")
+        validate_amount(montant_restant)
+
+        date_creation_str = input("Entrez la date de création du contrat (format YYYY-MM-DD HH:MM) : ")
+        aware_date_creation = validate_date(date_creation_str)
+
+        statut_abrev = input("Entrez le statut du contrat (ACT pour Actif, TER pour Terminé, ATT pour En Attente) : ")
+        statut_contrat = {'ACT': 'ACTIF', 'TER': 'TERMINE', 'ATT': 'EN_ATTENTE'}.get(statut_abrev.upper(), 'EN_ATTENTE')
+
         client = Client.objects.get(id=client_id)
-        new_contrat = Contrat(
-            nom=nom_contrat,
-            client=client,
-            sales_contact=current_user,
-            montant_total=montant_total,
-            montant_restant=montant_restant,
-            date_creation=aware_date_creation,
-            statut=statut_contrat
-        )
+        new_contrat = Contrat(nom=nom_contrat, client=client, sales_contact=current_user, montant_total=montant_total, montant_restant=montant_restant, date_creation=aware_date_creation, statut=statut_contrat)
         new_contrat.save()
         print(f"\033[92mContrat '{nom_contrat}' créé avec succès pour le client {client.full_name}.\033[0m")
     except Client.DoesNotExist:
         print("\033[91mClient introuvable.\033[0m")
     except ValidationError as e:
         print(f"\033[91mErreur de validation : {e}\033[0m")
+    except ValueError as e:
+        print(f"\033[91mErreur : {e}\033[0m")
 
 
 def list_contrats(current_user):
@@ -121,40 +129,42 @@ def update_contrat(current_user, contract_id):
 
     print(f"Modification du contrat {contrat.id} pour le client {contrat.client.full_name}")
 
-    # Demander les nouvelles informations pour la mise à jour
-    new_nom = input("Entrez le nouveau nom du contrat (laissez vide pour ne pas changer) : ")
-    new_montant_total = input("Entrez le nouveau montant total (laissez vide pour ne pas changer) : ")
-    new_montant_restant = input("Entrez le nouveau montant restant (laissez vide pour ne pas changer) : ")
-    new_statut = input("Entrez le nouveau statut (ACT/Ter/Att, laissez vide pour ne pas changer) : ")
+    try:
+        new_nom = input("Entrez le nouveau nom du contrat (laissez vide pour ne pas changer) : ")
+        if new_nom:
+            validate_contract_name(new_nom)
+            contrat.nom = new_nom
 
-    # Mise à jour des champs du contrat
-    if new_nom:
-        contrat.nom = new_nom
-    if new_montant_total:
-        contrat.montant_total = new_montant_total
-    if new_montant_restant:
-        contrat.montant_restant = new_montant_restant
-    if new_statut:
-        statut_dict = {'ACT': 'ACTIF', 'TER': 'TERMINE', 'ATT': 'EN_ATTENTE'}
-        contrat.statut = statut_dict.get(new_statut, contrat.statut)
+        new_montant_total = input("Entrez le nouveau montant total (laissez vide pour ne pas changer) : ")
+        if new_montant_total:
+            validate_amount(new_montant_total)
+            contrat.montant_total = new_montant_total
 
-    contrat.save()
-    print(f"\033[92mContrat {contrat.id} mis à jour avec succès.\033[0m")
+        new_montant_restant = input("Entrez le nouveau montant restant (laissez vide pour ne pas changer) : ")
+        if new_montant_restant:
+            validate_amount(new_montant_restant)
+            contrat.montant_restant = new_montant_restant
+
+        new_statut = input("Entrez le nouveau statut (ACT/Ter/Att, laissez vide pour ne pas changer) : ")
+        if new_statut:
+            statut_dict = {'ACT': 'ACTIF', 'TER': 'TERMINE', 'ATT': 'EN_ATTENTE'}
+            contrat.statut = statut_dict.get(new_statut.upper(), contrat.statut)
+
+        contrat.save()
+        print(f"\n\033[92mContrat {contrat.id} mis à jour avec succès.\033[0m")
+    except ValueError as e:
+        print(f"\033[91mErreur : {e}\033[0m")
 
 
 def reassign_contrat(current_user, contrat_id):
-    if (not current_user or
-            current_user.department not in ['GES', 'ADM']):
+    if (not current_user or current_user.department not in ['GES', 'ADM']):
         print("\033[91mAccès refusé.\033[0m")
-        msg = ("\033[91mSeules les personnes appartenant aux équipes "
-               "de gestion et administration "
-               "peuvent réaffecter un contrat.\033[0m")
-        print(msg)
+        print("\033[91mSeules les personnes des équipes de gestion et administration peuvent réaffecter un contrat.\033[0m")
         return
 
     try:
         contrat = Contrat.objects.get(id=contrat_id)
-        new_sales_contact_email = input("Entrez l'email du nouveau contact (GESTION): ")
+        new_sales_contact_email = input("Entrez l'email du nouveau contact commercial : ")
 
         try:
             new_sales_contact = Utilisateur.objects.get(email=new_sales_contact_email)
@@ -169,21 +179,16 @@ def reassign_contrat(current_user, contrat_id):
 
 
 def delete_contrat(current_user, contrat_id):
-
-    if (not current_user or
-            current_user.department not in ['GES', 'ADM']):
+    if (not current_user or current_user.department not in ['GES', 'ADM']):
         print("\033[91mAccès refusé.\033[0m")
-        msg = ("\033[91mSeules les personnes appartenant aux "
-               "équipes de gestion et administration "
-               "peuvent supprimer un contrat.\033[0m")
-        print(msg)
+        print("\033[91mSeules les personnes des équipes de gestion et administration peuvent supprimer un contrat.\033[0m")
         return
 
     try:
         contrat = Contrat.objects.get(id=contrat_id)
-        confirmation = input(f"Êtes-vous sûr de vouloir supprimer le contrat {contrat.id} ? (oui/non) : ")
+        confirmation = input(f"Êtes-vous sûr de vouloir supprimer le contrat {contrat.id} ? (oui/non) : ").lower()
 
-        if confirmation.lower() == 'oui':
+        if confirmation == 'oui':
             contrat.delete()
             print(f"\033[92mContrat {contrat.id} supprimé avec succès.\033[0m")
         else:
@@ -220,4 +225,4 @@ def gerer_contrats(current_user):
         elif choix == '6':
             break
         else:
-            print("\033[91mChoix invalide. Veuillez réessayer.\033[0m")
+            print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
