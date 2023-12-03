@@ -54,13 +54,13 @@ def create_contrat(current_user):
         client = Client.objects.get(id=client_id)
         new_contrat = Contrat(nom=nom_contrat, client=client, sales_contact=current_user, montant_total=montant_total, montant_restant=montant_restant, date_creation=aware_date_creation, statut=statut_contrat)
         new_contrat.save()
-        print(f"\033[92mContrat '{nom_contrat}' créé avec succès pour le client {client.full_name}.\033[0m")
+        print(f"\033[92mContrat '{nom_contrat}' créé avec succès pour le client {client.full_name}.\033\n[0m")
     except Client.DoesNotExist:
         print("\033[91mClient introuvable.\033[0m")
     except ValidationError as e:
-        print(f"\033[91mErreur de validation : {e}\033[0m")
+        print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
     except ValueError as e:
-        print(f"\033[91mErreur : {e}\033[0m")
+        print(f"\033[91mErreur : {e}\033\n[0m")
 
 
 def list_contrats(current_user):

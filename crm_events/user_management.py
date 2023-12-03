@@ -73,16 +73,17 @@ def validate_and_create_user(email, password, first_name, last_name, phone_numbe
             phone_number=phone_number,  # Ajouter phone_number ici
             department=department
         )
-        print(f"\033[92mCompte créé pour {user.email}\033[0m\n")
+        print(f"\n\033[92mCompte créé pour {user.email}\033[0m\n")
         return user
     except ValidationError as e:
-        print(f"\033[91mErreur de validation : {e.message}\033[0m")
+        print(f"\n\033[91mErreur de validation : {e.message}\033\n[0m")
         return None
 
 
 def validate_name(name):
     if not re.fullmatch(r'^[A-Za-z\s]+$', name):
         raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
+    return name
 
 
 def validate_email(email):
@@ -99,7 +100,7 @@ def create_user():
     global current_authenticated_user
 
     if current_authenticated_user is None:
-        print("\033[91mVous devez être connecté pour créer un utilisateur.\033[0m\n")
+        print("\n\033[91mVous devez être connecté pour créer un utilisateur.\033[0m\n")
         return
 
     if not current_authenticated_user.is_superuser and current_authenticated_user.department not in ['ADM', 'GES']:
@@ -121,7 +122,7 @@ def create_user():
             validate_and_create_user(email, password, first_name, last_name, phone_number, department)
             break
         except ValueError as e:
-            print(f"\033[91mErreur de validation : {e}\033[0m")
+            print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
 
 
 def authenticate_superuser():
@@ -173,10 +174,10 @@ def update_user(current_user, user_to_update_email):
                 user_to_update.phone = new_phone
             break
         except ValueError as e:
-            print(f"\033[91mErreur de validation : {e}\033[0m")
+            print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
 
     user_to_update.save()
-    print("\033[92mUtilisateur mis à jour.\033[0m\n")
+    print("\033[92mUtilisateur mis à jour.\033\[0m\n")
 
 
 def get_current_user():
@@ -213,7 +214,7 @@ def login(email=None, password=None, show_token=True):
 def logout():
     global current_authenticated_user
     current_authenticated_user = None
-    print("\033[92mVous êtes maintenant déconnecté\033[0m\n")
+    print("\n\033[92mVous êtes maintenant déconnecté\033[0m\n")
 
 
 def list_users():
@@ -287,6 +288,6 @@ def reassign_user(email, new_department, current_user_email):
     except Utilisateur.DoesNotExist:
         print("\033[91mAucun utilisateur trouvé avec cet email.\033[0m\n")
     except ValueError as e:
-        print(f"\033[91mErreur de validation : {e}\033[0m")
+        print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
     except Exception as e:
         print(f"Erreur lors de la ré-affectation de l'utilisateur : {e}")

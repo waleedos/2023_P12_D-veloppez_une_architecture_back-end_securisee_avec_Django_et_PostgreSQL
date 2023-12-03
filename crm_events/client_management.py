@@ -104,7 +104,7 @@ def add_client(current_user):
             updated_at=timezone.now()
         )
         client.save()
-        print(f"\033[92mClient {full_name} added successfully.\033[0m")
+        print(f"\033[92mClient {full_name} added successfully.\033\n[0m")
 
     except ValueError as e:
         print(e)
@@ -186,7 +186,7 @@ def update_client(current_user):
 
             client.updated_at = timezone.now()
             client.save()
-            print(f"\n\033[92mClient {client.full_name} updated successfully.\033[0m")
+            print(f"\n\033[92mClient {client.full_name} updated successfully.\033\n[0m")
             break  # Sortie de la boucle après succès
 
         except ValueError as e:
