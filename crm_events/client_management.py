@@ -26,7 +26,6 @@ def is_valid_email(email):
 
 
 def gerer_clients(current_user):
-    logger = logging.getLogger(__name__)
     logger.info(f"Accès à la gestion des clients par l'utilisateur: {current_user.email if current_user else 'None'}")
 
     while True:
@@ -56,7 +55,6 @@ def gerer_clients(current_user):
 
 
 def get_client_by_id():
-    logger = logging.getLogger(__name__)
     logger.info("Début de la recherche d'un client par ID")
 
     while True:
@@ -94,7 +92,6 @@ def validate_phone_number(phone_number):
 
 
 def add_client(current_user):
-    logger = logging.getLogger(__name__)
     logger.info("Début de l'ajout d'un nouveau client")
 
     if not current_user or current_user.department != 'COM':
@@ -136,7 +133,6 @@ def add_client(current_user):
 
 
 def list_clients():
-    logger = logging.getLogger(__name__)
     logger.info("Affichage de la liste des clients")
 
     clients = Client.objects.all()
@@ -149,7 +145,7 @@ def list_clients():
     table = PrettyTable()
     table.field_names = [" ID ", " Nom ", " Email ", " Téléphone ", " Entreprise ", " Commercial Assigné "]
     table.border = False
-    table.header = True  # Activer l'affichage des en-têtes
+    table.header = True
     table.align = 'l'
 
     for client in clients:

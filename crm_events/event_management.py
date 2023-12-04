@@ -20,7 +20,6 @@ def validate_name(name, updating=False):
     return name
 
 
-
 def validate_attendees(input_str):
     try:
         attendees = int(input_str)
@@ -39,7 +38,11 @@ def validate_notes(note):
 
 
 def create_event(current_user):
+    logger = logging.getLogger(__name__)
+    logger.info(f"Tentative de création d'un événement par {current_user.email}")
+
     if current_user.department not in ['COM', 'ADM']:
+        logger.warning("Accès refusé à la création d'événement - Utilisateur non autorisé")
         print("\n\033[91mAccès refusé. Seuls les utilisateurs COM et ADM peuvent créer des événements.\033\n[0m")
         return
 
@@ -48,12 +51,15 @@ def create_event(current_user):
     try:
         contrat = Contrat.objects.get(id=contrat_id)
         if current_user.department != 'ADM' and contrat.statut != 'ACTIF':
-            print(f"\n\033[91mLe contrat N° {contrat_id} du client {contrat.client.full_name} a le statut {contrat.statut}.\033\n[0m")
+            logger.warning(f"Contrat non actif pour la création de l'événement: {contrat_id}")
+            print(f"\n\033[91mLe contrat N° {contrat_id} a le statut {contrat.statut}.\033\n[0m")
             return
         if current_user.department == 'COM' and current_user.id != contrat.client.commercial_assigne.id:
+            logger.warning(f"Tentative de création d'événement pour un client non assigné: {contrat.client.full_name}")
             print("\n\033[91mVous ne pouvez pas créer d'événement pour un client qui n'est pas le vôtre.\033\n[0m")
             return
     except Contrat.DoesNotExist:
+        logger.error(f"Contrat non trouvé pour la création de l'événement: {contrat_id}")
         print("\n\033[91mContrat non trouvé.\033\n[0m")
         return
 
@@ -65,47 +71,43 @@ def create_event(current_user):
         type_evenement = input("Entrez le type de l'événement : ")
 
         date_debut_str = input("Entrez la date de début (format YYYY-MM-DD HH:MM) : ")
-        try:
-            date_debut = make_aware(datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M'))
-        except ValueError:
-            print("\n\033[91mFormat de date de début invalide.\033\n[0m")
-            return
+        date_debut = make_aware(datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M'))
 
         date_fin_str = input("Entrez la date de fin (format YYYY-MM-DD HH:MM) : ")
-        try:
-            date_fin = make_aware(datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M'))
-        except ValueError:
-            print("\n\033[91mFormat de date de fin invalide.\033\n[0m")
-            return
+        date_fin = make_aware(datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M'))
 
         evenement = Evenement(
             nom=nom, contrat=contrat, date_debut=date_debut, date_fin=date_fin,
             lieu=lieu, type_evenement=type_evenement, statut=Evenement.Statut.PLANIFIE,
-            gestionnaire=None, nombre_invites=int(nombre_invites), note=note
+            gestionnaire=None, nombre_invites=nombre_invites, note=note
         )
         evenement.save()
+        logger.info(f"Événement '{nom}' créé avec succès")
         print(f"\n\033[92mÉvénement '{nom}' créé avec succès.\033\n[0m")
-
     except ValueError as e:
+        logger.error(f"Erreur lors de la création de l'événement: {e}")
         print(f"\n\033[91mErreur : {e}\033\n[0m")
-        return
     except Exception as e:
+        logger.error(f"Une erreur s'est produite lors de la création de l'événement: {e}")
         print(f"\n\033[91mUne erreur s'est produite : {e}\033\n[0m")
-        return
 
 
 def list_events(current_user):
-    # Vérification des permissions de l'utilisateur
-    if current_user.department in ['GES', 'ADM', 'SUP', 'COM']:
+    logger = logging.getLogger(__name__)
+    logger.info(f"Tentative d'affichage des événements par {current_user.email}")
+
+    if current_user.department == 'SUP':
+        events = Evenement.objects.filter(gestionnaire=current_user)
+    elif current_user.department in ['GES', 'ADM', 'COM']:
         events = Evenement.objects.all()
     else:
-        events = Evenement.objects.filter(gestionnaire=current_user)
+        logger.warning("Accès refusé à l'affichage des événements - Utilisateur non autorisé")
+        print("\n\033[91mAccès refusé. Vous n'avez pas l'autorisation nécessaire.\033[0m")
+        return
 
     if events.exists():
         table = PrettyTable()
-        table.field_names = [
-            " ID ", " Nom ", " Début ", " Fin ", " Lieu ", " Type ", " Statut ", " Contrat ID ", " Gestionnaire "
-        ]
+        table.field_names = [" ID ", " Nom ", " Début ", " Fin ", " Lieu ", " Type ", " Statut ", " Contrat ID ", " Gestionnaire "]
         table.border = False
         table.header = True
         table.align = 'l'
@@ -124,24 +126,27 @@ def list_events(current_user):
                 " " + gestionnaire_email + " "
             ])
 
-        # Calcul de la largeur maximale pour l'affichage
         max_width = max(len(str(row)) for row in table.get_string().split("\n")) + 6
-        border_line = '\033[38;5;128m╠' + '═' * (max_width - 2) + '╣\033[0m'  # Couleur violet
+        border_line = '\033[38;5;128m╠' + '═' * (max_width - 2) + '╣\033[0m'
 
-        # Affichage du tableau avec les bordures personnalisées et en violet
-        print('\033[38;5;128m╔' + '═' * (max_width - 2) + '╗\033[0m')  # Couleur violet
+        print('\033[38;5;128m╔' + '═' * (max_width - 2) + '╗\033[0m')
         for i, line in enumerate(table.get_string().split("\n")):
-            print('\033[38;5;128m║' + line.ljust(max_width - 2) + '║\033[0m')  # Couleur violet
+            print('\033[38;5;128m║' + line.ljust(max_width - 2) + '║\033[0m')
             if i == 0:
                 print(border_line)
-        print('\033[38;5;128m╚' + '═' * (max_width - 2) + '╝\033[0m')  # Couleur violet
+        print('\033[38;5;128m╚' + '═' * (max_width - 2) + '╝\033[0m')
+        logger.info("Événements affichés avec succès")
     else:
+        logger.warning("Aucun événement disponible à afficher")
         print("\n\033[93mAucun événement disponible.\033[0m")
 
 
 def update_event(current_user):
-    print(f"Utilisateur actuel: {current_user.email}, Département: {current_user.department}")
+    logger = logging.getLogger(__name__)
+    logger.info(f"Tentative de mise à jour d'un événement par {current_user.email}")
+
     if current_user.department not in ['GES', 'SUP', 'ADM']:
+        logger.warning(f"Accès refusé pour la mise à jour d'événement par {current_user.email}")
         print("\n\033[93mAccès refusé. Seuls les utilisateurs GES et ADM peuvent modifier des événements.\033\n[0m")
         return
 
@@ -149,6 +154,7 @@ def update_event(current_user):
     try:
         evenement = Evenement.objects.get(id=event_id)
     except Evenement.DoesNotExist:
+        logger.error(f"Événement non trouvé pour l'ID: {event_id}")
         print("\n\033[91mÉvénement non trouvé.\033\n[0m")
         return
 
@@ -182,11 +188,13 @@ def update_event(current_user):
             evenement.date_fin = make_aware(datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M'))
 
         evenement.save()
+        logger.info(f"Événement '{evenement.nom}' mis à jour avec succès")
         print(f"\n\033[92mÉvénement '{evenement.nom}' mis à jour avec succès.\033\n[0m")
-
     except ValueError as e:
+        logger.error(f"Erreur lors de la mise à jour de l'événement: {e}")
         print(f"\n\033[91mErreur : {e}\033\n[0m")
     except Exception as e:
+        logger.error(f"Une erreur inattendue s'est produite lors de la mise à jour de l'événement: {e}")
         print(f"\n\033[91mUne erreur s'est produite : {e}\033\n[0m")
 
 
@@ -243,7 +251,11 @@ def gerer_events(current_user):
         print("3. Modifier un événement")
         print("4. Supprimer un événement")
         print("5. Réaffecter un événement")
-        print("6. Filtrer les événements sans support")
+
+        # Mettre à jour cette partie pour plus de clarté
+        if current_user.department == 'GES':
+            print("6. Filtrer les événements sans support")
+
         print("7. Retourner au menu principal")
 
         choix = input("Choisissez une option: ")
@@ -258,12 +270,9 @@ def gerer_events(current_user):
             delete_event(current_user)
         elif choix == '5':
             reassign_event(current_user)
-        elif choix == '6':
-            if current_user.department == 'GES':
-                evenements = filtrer_evenements_sans_support()
-                afficher_evenements(evenements)
-            else:
-                print("\n\033[91mAccès refusé. Seuls les utilisateurs GES peuvent effectuer cette action.\033\n[0m")
+        elif choix == '6' and current_user.department == 'GES':
+            evenements = filtrer_evenements_sans_support()
+            afficher_evenements(evenements)
         elif choix == '7':
             break
         else:

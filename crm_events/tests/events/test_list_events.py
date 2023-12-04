@@ -46,7 +46,7 @@ class ListEventsTest(TestCase):
             type_evenement='Type 1',
             statut='PL',
             contrat=self.contrat,
-            gestionnaire=self.user_ges
+            gestionnaire=self.user_sup
         )
         self.event2 = Evenement.objects.create(
             nom='Événement 2',
@@ -82,15 +82,16 @@ class ListEventsTest(TestCase):
 
     @patch('sys.stdout', new_callable=StringIO)
     def test_list_events_for_sup(self, mock_stdout):
+        # Ce test doit être ajusté pour vérifier que seuls les événements attribués au gestionnaire SUP sont listés
         list_events(self.user_sup)
         output = mock_stdout.getvalue()
-        self.assertIn("Événement 1", output)
-        self.assertIn("Événement 2", output)
+        self.assertIn("Événement 1", output)  # Assumant que l'événement 1 est attribué à user_sup
+        self.assertNotIn("Événement 2", output)  # Assumant que l'événement 2 n'est pas attribué à user_sup
 
     @patch('sys.stdout', new_callable=StringIO)
     def test_list_events_for_user_without_permission(self, mock_stdout):
-        # Test avec un utilisateur qui n'a pas l'autorisation (non créé dans setUp)
+        # Ce test doit vérifier que l'utilisateur reçoit un message d'accès refusé
         user_tech = Utilisateur.objects.create_user(email='tech@example.com', password='testpass', department='TEC')
         list_events(user_tech)
         output = mock_stdout.getvalue()
-        self.assertIn("Aucun événement disponible", output)
+        self.assertIn("Accès refusé. Vous n'avez pas l'autorisation nécessaire", output)

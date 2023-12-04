@@ -132,3 +132,7 @@ def afficher_contrats(contrats):
         if i == 0:
             print(border_line)
     print('\033[38;5;202m╚' + '═' * (max_width - 2) + '╝\033[0m')
+
+
+def filtrer_evenements_attribues_a_utilisateur(current_user):
+    return Evenement.objects.filter(gestionnaire=current_user)
