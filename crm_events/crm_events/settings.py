@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import sentry_sdk
 
+
 # Charger les variables d'environnement du fichier .env
 load_dotenv()
 
