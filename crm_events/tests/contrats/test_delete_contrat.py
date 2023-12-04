@@ -35,11 +35,9 @@ class DeleteContratTest(TestCase):
     def test_refusal_for_non_authorized_users(self):
         with patch('builtins.input', return_value='non'), \
                 patch('builtins.print') as mock_print:
-            # Utiliser un utilisateur non autorisé, par exemple 'user_tst'
             delete_contrat(self.user_tst, self.contrat_test.id)
 
-            expected_message = ("\033[91mSeules les personnes appartenant aux "
-                                "équipes de gestion et administration peuvent "
+            expected_message = ("\033[91mSeules les personnes des équipes de gestion et administration peuvent "
                                 "supprimer un contrat.\033[0m")
             mock_print.assert_called_with(expected_message)
 

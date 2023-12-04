@@ -14,7 +14,8 @@ def mock_current_user():
 def test_add_client_success():
     test_user = Utilisateur.objects.create(email="testuser@example.com", department="COM")
 
-    client_data = ["John Doe", "john@example.com", "123456789", "Doe Inc."]
+    # Utilisez un numéro de téléphone valide
+    client_data = ["John Doe", "john@example.com", "+12345678901", "Doe Inc."]
 
     with patch('client_management.input', side_effect=client_data):
         with patch('client_management.is_valid_email', return_value=True):
@@ -23,7 +24,7 @@ def test_add_client_success():
             added_client = Client.objects.filter(email="john@example.com").first()
             assert added_client is not None
             assert added_client.full_name == "John Doe"
-            assert added_client.phone_number == "123456789"
+            assert added_client.phone_number == "+12345678901"
             assert added_client.company_name == "Doe Inc."
 
 

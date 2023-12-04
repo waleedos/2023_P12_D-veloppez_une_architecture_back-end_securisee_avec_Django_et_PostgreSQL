@@ -1,3 +1,4 @@
+import logging
 import re
 from epic_events_app.models import Evenement
 from epic_auth_app.models import Utilisateur
@@ -5,6 +6,8 @@ from prettytable import PrettyTable
 from epic_contracts_app.models import Contrat
 from datetime import datetime
 from django.utils.timezone import make_aware
+
+logger = logging.getLogger(__name__)
 
 
 def validate_name(name):

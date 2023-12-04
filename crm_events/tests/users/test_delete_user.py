@@ -1,8 +1,7 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 from user_management import delete_user
 from epic_auth_app.models import Utilisateur
-from django.core.exceptions import PermissionDenied
 
 
 # Test de succès
@@ -27,5 +26,6 @@ def test_delete_user_permission_denied(capfd):
     mock_user_to_delete = MagicMock(spec=Utilisateur, email="user@example.com")
 
     with patch('epic_auth_app.models.Utilisateur.objects.get', side_effect=[mock_requesting_user, mock_user_to_delete]):
-        with pytest.raises(PermissionDenied):
-            delete_user("nonadminuser@example.com", "user@example.com")
+        delete_user("nonadminuser@example.com", "user@example.com")
+        captured = capfd.readouterr()
+        assert "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire pour supprimer cet utilisateur.\n" in captured.out

@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 import django
@@ -6,6 +7,8 @@ from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
 from prettytable import PrettyTable
 from epic_auth_app.models import Utilisateur
+
+logger = logging.getLogger(__name__)
 
 # Configuration de l'environnement Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crm_events.settings')
@@ -23,6 +26,9 @@ def is_valid_email(email):
 
 
 def gerer_clients(current_user):
+    logger = logging.getLogger(__name__)
+    logger.info(f"Accès à la gestion des clients par l'utilisateur: {current_user.email if current_user else 'None'}")
+
     while True:
         print("\033[38;5;202mGestion des Clients\033[0m\n")
         print("1. Afficher tous les Clients")
@@ -33,26 +39,37 @@ def gerer_clients(current_user):
         choix_client = input("\033[96mChoisissez une action: \033[0m")
 
         if choix_client == '1':
-            list_clients()  # Appel de la fonction list_clients pour afficher tous les clients
+            logger.info("Choix de l'affichage de tous les clients")
+            list_clients()
         elif choix_client == '2':
-            add_client(current_user)  # Logique pour ajouter un nouveau client
+            logger.info("Choix de l'ajout d'un nouveau client")
+            add_client(current_user)
         elif choix_client == '3':
-            update_client(current_user)  # Logique pour modifier un client
+            logger.info("Choix de la modification d'un client")
+            update_client(current_user)
         elif choix_client == '4':
-            break  # Sortir de la boucle pour revenir au menu principal
+            logger.info("Sortie de la gestion des clients")
+            break
         else:
+            logger.warning("Choix invalide dans la gestion des clients")
             print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
 
 
 def get_client_by_id():
+    logger = logging.getLogger(__name__)
+    logger.info("Début de la recherche d'un client par ID")
+
     while True:
         try:
             client_id = int(input("Enter client ID: "))
             client = Client.objects.get(id=client_id)
+            logger.info(f"Client trouvé avec l'ID : {client_id}")
             return client
         except ValueError:
+            logger.error("Erreur de format de numéro pour l'ID du client")
             print("Please enter a valid number.")
         except Client.DoesNotExist:
+            logger.warning(f"Aucun client trouvé pour l'ID : {client_id}")
             print("No client found with the given ID.")
             if input("Try again? (yes/no): ").lower() != 'yes':
                 return None
@@ -74,7 +91,11 @@ def validate_phone_number(phone_number):
 
 
 def add_client(current_user):
+    logger = logging.getLogger(__name__)
+    logger.info("Début de l'ajout d'un nouveau client")
+
     if not current_user or current_user.department != 'COM':
+        logger.warning("Accès refusé à l'ajout de client - utilisateur non autorisé")
         print("\033[91mAccès refusé. Seuls les membres de l'équipe commerciale peuvent ajouter des clients.\033[0m")
         return
 
@@ -84,16 +105,15 @@ def add_client(current_user):
         phone_number = input("Enter phone number: ").strip()
         company_name = input("Enter company name: ").strip()
 
-        # Appliquer les validations
         validate_name(full_name)
         validate_email(email)
         validate_phone_number(phone_number)
 
         if not company_name:
+            logger.warning("Le nom de l'entreprise est vide lors de l'ajout du client")
             print("Le nom de l'entreprise ne peut pas être vide.")
             return
 
-        # Création du client avec le commercial assigné
         client = Client(
             full_name=full_name,
             email=email,
@@ -104,21 +124,31 @@ def add_client(current_user):
             updated_at=timezone.now()
         )
         client.save()
+        logger.info(f"Client {full_name} ajouté avec succès")
         print(f"\033[92mClient {full_name} added successfully.\033\n[0m")
 
     except ValueError as e:
+        logger.error(f"Erreur lors de l'ajout du client : {e}")
         print(e)
 
 
 def list_clients():
+    logger = logging.getLogger(__name__)
+    logger.info("Affichage de la liste des clients")
+
     clients = Client.objects.all()
+
+    if not clients:
+        logger.warning("Aucun client à afficher")
+        print("\033[93mAucun client disponible.\033[0m")
+        return
+
     table = PrettyTable()
     table.field_names = [" ID ", " Nom ", " Email ", " Téléphone ", " Entreprise ", " Commercial Assigné "]
     table.border = False
     table.header = True  # Activer l'affichage des en-têtes
     table.align = 'l'
 
-    # Ajout des lignes de clients au tableau
     for client in clients:
         commercial_assigne = client.commercial_assigne.get_full_name() if client.commercial_assigne else 'Non Assigné'
         table.add_row([
@@ -130,67 +160,70 @@ def list_clients():
             " " + commercial_assigne + " ",
         ])
 
-    # Calcul de la largeur maximale pour l'affichage
     max_width = max(len(str(row)) for row in table.get_string().split("\n")) + 6
-    border_line = '\033[33m╠' + '═' * (max_width - 2) + '╣\033[0m'  # Couleur orange pour la bordure
+    border_line = '\033[33m╠' + '═' * (max_width - 2) + '╣\033[0m'
 
-    # Affichage du tableau avec les bordures personnalisées et en orange
     print('\033[33m╔' + '═' * (max_width - 2) + '╗\033[0m')
     for i, line in enumerate(table.get_string().split("\n")):
         print('\033[33m║' + line.ljust(max_width - 2) + '║\033[0m')
-        if i == 0:  # Après l'en-tête
+        if i == 0:
             print(border_line)
     print('\033[33m╚' + '═' * (max_width - 2) + '╝\033[0m')
 
+    logger.info("Liste des clients affichée avec succès")
+
 
 def update_client(current_user):
-    print(f"Current user department: {current_user.department if current_user else 'None'}")
+    logger.info(f"Tentative de mise à jour d'un client par l'utilisateur: {current_user.email if current_user else 'None'}")
+
     if not current_user or current_user.department not in ['COM', 'ADM']:
+        logger.warning("Accès refusé pour la mise à jour du client - permissions insuffisantes")
         print("\n\033[91mAccès refusé. Vous n'avez pas les permissions nécessaires.\033\n[0m")
         return
 
-    list_clients()  # Afficher la liste des clients avec la colonne commercial assigné
-    client_id = input("Enter the ID of the client to update: ").strip()
+    list_clients()
 
     try:
+        client_id = input("Enter the ID of the client to update: ").strip()
         client = Client.objects.get(id=client_id)
+
+        while True:
+            try:
+                new_full_name = input("Enter new full name (leave blank to not change): ").strip()
+                new_email = input("Enter new email (leave blank to not change): ").strip()
+                new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
+                new_company_name = input("Enter new company name (leave blank to not change): ").strip()
+                new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
+
+                if new_full_name:
+                    validate_name(new_full_name)
+                    client.full_name = new_full_name
+                if new_email:
+                    validate_email(new_email)
+                    client.email = new_email
+                if new_phone_number:
+                    validate_phone_number(new_phone_number)
+                    client.phone_number = new_phone_number
+                if new_company_name:
+                    client.company_name = new_company_name
+                if new_commercial_assigne_id:
+                    new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
+                    client.commercial_assigne = new_commercial
+
+                client.updated_at = timezone.now()
+                client.save()
+                logger.info(f"Client mis à jour avec succès : {client.full_name}")
+                print(f"\n\033[92mClient {client.full_name} mis à jour avec succès.\033\n[0m")
+                break
+
+            except ValueError as e:
+                logger.error(f"Erreur lors de la mise à jour du client : {e}")
+                print(e)
+            except Utilisateur.DoesNotExist:
+                logger.error("Commercial assigné introuvable.")
+                print("Commercial not found.")
+                continue
+
     except Client.DoesNotExist:
+        logger.error(f"Client introuvable pour l'ID : {client_id}")
         print("\n\033[91mClient not found.\033\n[0m")
-        return
-
-    while True:
-        try:
-            new_full_name = input("Enter new full name (leave blank to not change): ").strip()
-            new_email = input("Enter new email (leave blank to not change): ").strip()
-            new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
-            new_company_name = input("Enter new company name (leave blank to not change): ").strip()
-            new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
-
-            # Appliquer les validations
-            if new_full_name:
-                validate_name(new_full_name)
-                client.full_name = new_full_name
-            if new_email:
-                validate_email(new_email)
-                client.email = new_email
-            if new_phone_number:
-                validate_phone_number(new_phone_number)
-                client.phone_number = new_phone_number
-            if new_company_name:
-                client.company_name = new_company_name
-
-            # Mise à jour du commercial assigné si nécessaire
-            if new_commercial_assigne_id:
-                new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
-                client.commercial_assigne = new_commercial
-
-            client.updated_at = timezone.now()
-            client.save()
-            print(f"\n\033[92mClient {client.full_name} updated successfully.\033\n[0m")
-            break  # Sortie de la boucle après succès
-
-        except ValueError as e:
-            print(e)  # Affiche l'erreur et redemande les données
-        except Utilisateur.DoesNotExist:
-            print("Commercial not found.")
-            continue  # Demande à nouveau les données

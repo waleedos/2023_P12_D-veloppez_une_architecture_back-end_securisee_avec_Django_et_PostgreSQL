@@ -15,9 +15,9 @@ def test_validate_and_create_user_success(capfd):
 
 @pytest.mark.django_db
 def test_validate_and_create_user_invalid_email(capfd):
-    validate_and_create_user('invalidemail', 'Password123', 'John', 'Doe', '0123456789', 'ADM')
-    out, err = capfd.readouterr()
-    assert "Erreur de validation : " in out
+    with pytest.raises(ValueError) as excinfo:
+        validate_and_create_user('invalidemail', 'Password123', 'John', 'Doe', '0123456789', 'ADM')
+    assert "Format d'email invalide." in str(excinfo.value)
 
 
 @pytest.mark.django_db

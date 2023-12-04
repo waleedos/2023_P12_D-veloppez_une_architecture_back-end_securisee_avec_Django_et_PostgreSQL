@@ -1,0 +1,412 @@
+INFO 2023-12-03 15:37:53,211 main Démarrage de l'application
+INFO 2023-12-03 15:38:45,116 user_management Tentative de connexion pour l'email : ges1@epic-events.com
+INFO 2023-12-03 15:38:45,492 user_management Utilisateur ges1@epic-events.com authentifié avec succès
+INFO 2023-12-03 15:39:00,580 user_management Affichage de la liste des utilisateurs
+DEBUG 2023-12-03 15:41:58,494 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-03 15:41:59,400 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-03 15:42:04,240 main Démarrage de l'application
+INFO 2023-12-03 15:42:16,932 user_management Tentative de connexion pour l'email : ges1@epic-events.com
+INFO 2023-12-03 15:42:17,307 user_management Utilisateur ges1@epic-events.com authentifié avec succès
+INFO 2023-12-03 15:46:29,864 user_management Affichage de la liste des utilisateurs
+ERROR 2023-12-03 18:04:33,204 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,227 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,230 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,233 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,236 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,239 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,243 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,246 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,249 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,252 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,255 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,259 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,262 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,265 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,268 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,272 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,275 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-03 18:04:33,279 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+ERROR 2023-12-03 18:04:33,279 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,283 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,286 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,292 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,296 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,300 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,307 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,311 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,315 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,319 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,323 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,326 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+ERROR 2023-12-03 18:04:33,330 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-03 18:04:34,047 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,253 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,373 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,581 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,705 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,829 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:34,953 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:35,077 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:35,197 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-03 18:04:35,345 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-03 18:56:04,183 main Démarrage de l'application
+INFO 2023-12-03 18:56:49,407 user_management Tentative de connexion pour l'email : ges3@epic-events.com
+INFO 2023-12-03 18:56:49,724 user_management Utilisateur ges3@epic-events.com authentifié avec succès
+INFO 2023-12-03 18:59:20,349 user_management Compte créé pour com6@epic-events.com
+INFO 2023-12-03 18:59:20,349 user_management Utilisateur com6@epic-events.com créé avec succès
+INFO 2023-12-03 19:00:37,263 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-03 19:04:33,202 user_management Utilisateur com6@epic-events.com supprimé par ges3@epic-events.com
+DEBUG 2023-12-03 19:05:11,329 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-03 19:05:12,565 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-03 19:05:48,466 main Démarrage de l'application
+INFO 2023-12-03 19:06:50,143 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-03 19:09:32,008 main L'utilisateur a quitté l'application
+INFO 2023-12-03 19:10:43,491 user_management Compte créé pour nouveau@example.com
+INFO 2023-12-03 19:10:43,491 user_management Utilisateur nouveau@example.com créé avec succès
+WARNING 2023-12-03 19:10:43,525 user_management Tentative de création d'utilisateur par <MagicMock name='mock.email' id='139777875717728'> sans accréditation suffisante
+ERROR 2023-12-03 19:10:43,528 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-03 19:10:43,553 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-03 19:10:44,399 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-03 19:25:19,200 user_management Compte créé pour valid@example.com
+INFO 2023-12-03 19:25:19,201 user_management Utilisateur valid@example.com créé avec succès
+INFO 2023-12-04 01:47:55,206 user_management Updating user existing@example.com
+INFO 2023-12-04 01:47:55,211 user_management Updating user target@example.com
+INFO 2023-12-04 01:53:51,339 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 01:53:51,343 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+WARNING 2023-12-04 01:56:10,285 user_management Tentative de création d'utilisateur sans authentification
+WARNING 2023-12-04 01:56:10,341 user_management Tentative de création d'utilisateur sans authentification
+WARNING 2023-12-04 01:59:02,430 user_management Tentative de création d'utilisateur sans authentification
+WARNING 2023-12-04 01:59:02,487 user_management Tentative de création d'utilisateur sans authentification
+INFO 2023-12-04 02:00:54,513 user_management Compte créé pour <MagicMock name='create_user().email' id='140311801271280'>
+INFO 2023-12-04 02:00:54,513 user_management Utilisateur validemail@example.com créé avec succès
+WARNING 2023-12-04 02:00:54,516 user_management Tentative de création d'utilisateur sans authentification
+INFO 2023-12-04 02:02:19,405 user_management Compte créé pour <MagicMock name='create_user().email' id='140662519798880'>
+INFO 2023-12-04 02:02:19,406 user_management Utilisateur validemail@example.com créé avec succès
+ERROR 2023-12-04 02:02:19,409 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:02:19,435 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 02:02:19,573 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:05:04,597 user_management Compte créé pour <MagicMock name='create_user().email' id='140351074092224'>
+INFO 2023-12-04 02:05:04,597 user_management Utilisateur validemail@example.com créé avec succès
+ERROR 2023-12-04 02:05:04,600 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:05:04,624 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 02:05:04,730 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:06:04,176 user_management Compte créé pour <MagicMock name='create_user().email' id='140644084696976'>
+INFO 2023-12-04 02:06:04,177 user_management Utilisateur validemail@example.com créé avec succès
+ERROR 2023-12-04 02:06:04,180 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:06:04,203 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+INFO 2023-12-04 02:06:04,208 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 02:06:04,212 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+DEBUG 2023-12-04 02:06:04,303 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:06:04,516 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:06:04,817 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:06:05,104 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:06:05,106 user_management Utilisateur actuellement connecté : testuser@example.com
+INFO 2023-12-04 02:06:05,692 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:06:05,994 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:06:06,282 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:06:06,286 user_management Tentative de connexion pour l'email : invaliduser@example.com
+WARNING 2023-12-04 02:06:06,581 user_management Échec de l'authentification pour l'utilisateur invaliduser@example.com
+INFO 2023-12-04 02:06:06,882 user_management Tentative de connexion pour l'email : testlogout@example.com
+INFO 2023-12-04 02:06:07,171 user_management Utilisateur testlogout@example.com authentifié avec succès
+INFO 2023-12-04 02:06:07,171 user_management Utilisateur actuellement connecté : testlogout@example.com
+INFO 2023-12-04 02:06:07,171 user_management Utilisateur testlogout@example.com déconnecté
+INFO 2023-12-04 02:06:07,172 user_management Aucun utilisateur actuellement connecté
+INFO 2023-12-04 02:06:07,757 user_management Tentative de réaffectation de l'utilisateur : normaluser@example.com au département : ADM
+INFO 2023-12-04 02:06:07,759 user_management Utilisateur normaluser@example.com réaffecté avec succès au département ADM
+INFO 2023-12-04 02:06:07,783 user_management Updating user existing@example.com
+INFO 2023-12-04 02:06:07,788 user_management Updating user target@example.com
+INFO 2023-12-04 02:06:07,792 user_management Compte créé pour validemail@example.com
+WARNING 2023-12-04 02:06:07,797 user_management Erreur de validation lors de la création de l'utilisateur : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.
+INFO 2023-12-04 02:15:00,021 user_management Début de la création d'un nouvel utilisateur
+INFO 2023-12-04 02:15:00,023 user_management Compte créé pour <MagicMock name='create_user().email' id='140532637889488'>
+INFO 2023-12-04 02:15:00,023 user_management Utilisateur validemail@example.com créé avec succès
+INFO 2023-12-04 02:15:00,026 user_management Début de la création d'un nouvel utilisateur
+ERROR 2023-12-04 02:15:00,026 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:15:00,051 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 02:15:00,152 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:15:34,475 user_management Début de la création d'un nouvel utilisateur
+INFO 2023-12-04 02:15:34,477 user_management Compte créé pour <MagicMock name='create_user().email' id='140431797202000'>
+INFO 2023-12-04 02:15:34,477 user_management Utilisateur validemail@example.com créé avec succès
+INFO 2023-12-04 02:15:34,480 user_management Début de la création d'un nouvel utilisateur
+ERROR 2023-12-04 02:15:34,480 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:15:34,503 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+INFO 2023-12-04 02:15:34,508 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 02:15:34,512 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+DEBUG 2023-12-04 02:15:34,618 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:15:34,817 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:15:35,114 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:15:35,403 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:15:35,403 user_management Utilisateur actuellement connecté : testuser@example.com
+INFO 2023-12-04 02:15:35,987 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:15:36,287 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:15:36,575 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:15:36,579 user_management Tentative de connexion pour l'email : invaliduser@example.com
+WARNING 2023-12-04 02:15:36,874 user_management Échec de l'authentification pour l'utilisateur invaliduser@example.com
+INFO 2023-12-04 02:15:37,173 user_management Tentative de connexion pour l'email : testlogout@example.com
+INFO 2023-12-04 02:15:37,464 user_management Utilisateur testlogout@example.com authentifié avec succès
+INFO 2023-12-04 02:15:37,464 user_management Utilisateur actuellement connecté : testlogout@example.com
+INFO 2023-12-04 02:15:37,465 user_management Utilisateur testlogout@example.com déconnecté
+INFO 2023-12-04 02:15:37,465 user_management Aucun utilisateur actuellement connecté
+INFO 2023-12-04 02:15:38,051 user_management Tentative de réaffectation de l'utilisateur : normaluser@example.com au département : ADM
+INFO 2023-12-04 02:15:38,053 user_management Utilisateur normaluser@example.com réaffecté avec succès au département ADM
+INFO 2023-12-04 02:15:38,076 user_management Updating user existing@example.com
+INFO 2023-12-04 02:15:38,081 user_management Updating user target@example.com
+INFO 2023-12-04 02:15:38,085 user_management Compte créé pour validemail@example.com
+WARNING 2023-12-04 02:15:38,090 user_management Erreur de validation lors de la création de l'utilisateur : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.
+INFO 2023-12-04 02:16:36,359 user_management Début de la création d'un nouvel utilisateur
+INFO 2023-12-04 02:16:36,360 user_management Compte créé pour <MagicMock name='create_user().email' id='140686186422400'>
+INFO 2023-12-04 02:16:36,364 user_management Utilisateur validemail@example.com créé avec succès
+INFO 2023-12-04 02:16:36,367 user_management Début de la création d'un nouvel utilisateur
+ERROR 2023-12-04 02:16:36,367 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:16:36,394 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+INFO 2023-12-04 02:16:36,399 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 02:16:36,404 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+DEBUG 2023-12-04 02:16:36,500 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:16:36,715 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:16:37,015 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:16:37,302 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:16:37,302 user_management Utilisateur actuellement connecté : testuser@example.com
+INFO 2023-12-04 02:16:37,888 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:16:38,187 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:16:38,474 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:16:38,478 user_management Tentative de connexion pour l'email : invaliduser@example.com
+WARNING 2023-12-04 02:16:38,773 user_management Échec de l'authentification pour l'utilisateur invaliduser@example.com
+INFO 2023-12-04 02:16:39,071 user_management Tentative de connexion pour l'email : testlogout@example.com
+INFO 2023-12-04 02:16:39,358 user_management Utilisateur testlogout@example.com authentifié avec succès
+INFO 2023-12-04 02:16:39,358 user_management Utilisateur actuellement connecté : testlogout@example.com
+INFO 2023-12-04 02:16:39,358 user_management Utilisateur testlogout@example.com déconnecté
+INFO 2023-12-04 02:16:39,359 user_management Aucun utilisateur actuellement connecté
+INFO 2023-12-04 02:16:39,956 user_management Tentative de réaffectation de l'utilisateur : normaluser@example.com au département : ADM
+INFO 2023-12-04 02:16:39,958 user_management Utilisateur normaluser@example.com réaffecté avec succès au département ADM
+INFO 2023-12-04 02:16:39,962 user_management Updating user existing@example.com
+INFO 2023-12-04 02:16:39,966 user_management Updating user target@example.com
+INFO 2023-12-04 02:16:39,970 user_management Compte créé pour validemail@example.com
+WARNING 2023-12-04 02:16:39,975 user_management Erreur de validation lors de la création de l'utilisateur : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.
+INFO 2023-12-04 02:27:22,481 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 02:27:22,482 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 02:27:22,487 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 02:27:22,487 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 02:27:49,404 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 02:27:49,405 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 02:27:49,411 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 02:27:49,411 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 02:39:30,270 client_management Tentative de mise à jour d'un client par l'utilisateur: clientuser@example.com
+INFO 2023-12-04 02:39:30,273 client_management Client mis à jour avec succès : Jane Doe
+INFO 2023-12-04 02:39:30,278 client_management Tentative de mise à jour d'un client par l'utilisateur: nonclientuser@example.com
+WARNING 2023-12-04 02:39:30,278 client_management Accès refusé pour la mise à jour du client - permissions insuffisantes
+INFO 2023-12-04 02:39:56,030 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 02:39:56,031 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 02:39:56,035 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 02:39:56,035 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 02:39:56,048 client_management Tentative de mise à jour d'un client par l'utilisateur: clientuser@example.com
+INFO 2023-12-04 02:39:56,050 client_management Client mis à jour avec succès : Jane Doe
+INFO 2023-12-04 02:39:56,055 client_management Tentative de mise à jour d'un client par l'utilisateur: nonclientuser@example.com
+WARNING 2023-12-04 02:39:56,055 client_management Accès refusé pour la mise à jour du client - permissions insuffisantes
+INFO 2023-12-04 02:46:00,111 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 02:46:00,112 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 02:46:00,117 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 02:46:00,117 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 02:46:00,120 client_management Début de la recherche d'un client par ID
+INFO 2023-12-04 02:46:00,121 client_management Client trouvé avec l'ID : 2
+INFO 2023-12-04 02:46:00,124 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:46:00,126 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:46:00,132 client_management Tentative de mise à jour d'un client par l'utilisateur: clientuser@example.com
+INFO 2023-12-04 02:46:00,132 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:46:00,133 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:46:00,134 client_management Client mis à jour avec succès : Jane Doe
+INFO 2023-12-04 02:46:00,139 client_management Tentative de mise à jour d'un client par l'utilisateur: nonclientuser@example.com
+WARNING 2023-12-04 02:46:00,139 client_management Accès refusé pour la mise à jour du client - permissions insuffisantes
+INFO 2023-12-04 02:46:09,986 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 02:46:09,988 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 02:46:09,992 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 02:46:09,992 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 02:46:09,996 client_management Début de la recherche d'un client par ID
+INFO 2023-12-04 02:46:09,996 client_management Client trouvé avec l'ID : 2
+INFO 2023-12-04 02:46:10,000 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:46:10,002 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:46:10,006 client_management Tentative de mise à jour d'un client par l'utilisateur: clientuser@example.com
+INFO 2023-12-04 02:46:10,006 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:46:10,007 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:46:10,009 client_management Client mis à jour avec succès : Jane Doe
+INFO 2023-12-04 02:46:10,014 client_management Tentative de mise à jour d'un client par l'utilisateur: nonclientuser@example.com
+WARNING 2023-12-04 02:46:10,014 client_management Accès refusé pour la mise à jour du client - permissions insuffisantes
+INFO 2023-12-04 02:46:10,912 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:46:10,913 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:46:29,842 user_management Début de la création d'un nouvel utilisateur
+INFO 2023-12-04 02:46:29,843 user_management Compte créé pour <MagicMock name='create_user().email' id='140302463333568'>
+INFO 2023-12-04 02:46:29,843 user_management Utilisateur validemail@example.com créé avec succès
+INFO 2023-12-04 02:46:29,846 user_management Début de la création d'un nouvel utilisateur
+ERROR 2023-12-04 02:46:29,846 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+DEBUG 2023-12-04 02:46:29,870 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+INFO 2023-12-04 02:46:29,875 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 02:46:29,879 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+DEBUG 2023-12-04 02:46:30,028 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:46:30,186 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:46:30,487 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:46:30,780 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:46:30,781 user_management Utilisateur actuellement connecté : testuser@example.com
+INFO 2023-12-04 02:46:31,371 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 02:46:31,675 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 02:46:31,971 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 02:46:31,975 user_management Tentative de connexion pour l'email : invaliduser@example.com
+WARNING 2023-12-04 02:46:32,272 user_management Échec de l'authentification pour l'utilisateur invaliduser@example.com
+INFO 2023-12-04 02:46:32,571 user_management Tentative de connexion pour l'email : testlogout@example.com
+INFO 2023-12-04 02:46:32,866 user_management Utilisateur testlogout@example.com authentifié avec succès
+INFO 2023-12-04 02:46:32,867 user_management Utilisateur actuellement connecté : testlogout@example.com
+INFO 2023-12-04 02:46:32,867 user_management Utilisateur testlogout@example.com déconnecté
+INFO 2023-12-04 02:46:32,867 user_management Aucun utilisateur actuellement connecté
+INFO 2023-12-04 02:46:33,454 user_management Tentative de réaffectation de l'utilisateur : normaluser@example.com au département : ADM
+INFO 2023-12-04 02:46:33,456 user_management Utilisateur normaluser@example.com réaffecté avec succès au département ADM
+INFO 2023-12-04 02:46:33,461 user_management Updating user existing@example.com
+INFO 2023-12-04 02:46:33,465 user_management Updating user target@example.com
+INFO 2023-12-04 02:46:33,469 user_management Compte créé pour validemail@example.com
+WARNING 2023-12-04 02:46:33,475 user_management Erreur de validation lors de la création de l'utilisateur : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.
+INFO 2023-12-04 02:47:28,720 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:47:28,724 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 02:50:43,258 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:50:43,261 client_management Liste des clients affichée avec succès
+ERROR 2023-12-04 02:58:17,976 contract_management Tentative de suppression d'un contrat inexistant: 999
+DEBUG 2023-12-04 02:58:18,000 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 02:58:18,103 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:58:19,017 contract_management Contrat 2 supprimé avec succès par adm@example.com
+WARNING 2023-12-04 02:58:19,916 contract_management Utilisateur non autorisé tst@example.com a tenté de supprimer le contrat 3
+ERROR 2023-12-04 02:59:12,979 contract_management Tentative de réaffectation d'un contrat inexistant: 999
+DEBUG 2023-12-04 02:59:13,004 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+ERROR 2023-12-04 02:59:13,004 contract_management Tentative de réaffectation à un utilisateur commercial inexistant: non_existent@example.com
+DEBUG 2023-12-04 02:59:13,105 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-04 02:59:13,124 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:59:14,173 contract_management Contrat 2 réaffecté à new_sales@example.com par adm@example.com
+WARNING 2023-12-04 02:59:15,340 contract_management Utilisateur non autorisé tst@example.com a tenté de réaffecter le contrat 3
+INFO 2023-12-04 02:59:30,176 client_management Affichage de la liste des clients
+INFO 2023-12-04 02:59:30,179 client_management Liste des clients affichée avec succès
+ERROR 2023-12-04 02:59:31,953 contract_management Tentative de suppression d'un contrat inexistant: 999
+DEBUG 2023-12-04 02:59:31,976 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 02:59:32,074 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:59:32,853 contract_management Contrat 2 supprimé avec succès par adm@example.com
+WARNING 2023-12-04 02:59:33,723 contract_management Utilisateur non autorisé tst@example.com a tenté de supprimer le contrat 3
+ERROR 2023-12-04 02:59:36,406 contract_management Tentative de réaffectation d'un contrat inexistant: 999
+ERROR 2023-12-04 02:59:36,411 contract_management Tentative de réaffectation à un utilisateur commercial inexistant: non_existent@example.com
+DEBUG 2023-12-04 02:59:36,431 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-04 02:59:36,451 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 02:59:37,578 contract_management Contrat 5 réaffecté à new_sales@example.com par adm@example.com
+WARNING 2023-12-04 02:59:38,751 contract_management Utilisateur non autorisé tst@example.com a tenté de réaffecter le contrat 6
+INFO 2023-12-04 03:05:11,908 contract_management Tentative de création d'un contrat par ges@example.com
+INFO 2023-12-04 03:05:11,910 client_management Affichage de la liste des clients
+INFO 2023-12-04 03:05:11,911 client_management Liste des clients affichée avec succès
+ERROR 2023-12-04 03:05:11,912 contract_management Client introuvable lors de la création d'un contrat
+DEBUG 2023-12-04 03:05:11,935 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 03:05:12,034 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:05:12,812 contract_management Tentative de création d'un contrat par other@example.com
+WARNING 2023-12-04 03:05:12,812 contract_management Accès refusé pour la création de contrat par other@example.com
+INFO 2023-12-04 03:13:22,484 contract_management Tentative de création d'un contrat par ges@example.com
+INFO 2023-12-04 03:13:22,486 client_management Affichage de la liste des clients
+INFO 2023-12-04 03:13:22,487 client_management Liste des clients affichée avec succès
+ERROR 2023-12-04 03:13:22,488 contract_management Client introuvable lors de la création d'un contrat
+DEBUG 2023-12-04 03:13:22,512 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 03:13:22,611 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:13:23,401 contract_management Tentative de création d'un contrat par other@example.com
+WARNING 2023-12-04 03:13:23,401 contract_management Accès refusé pour la création de contrat par other@example.com
+ERROR 2023-12-04 03:13:24,289 contract_management Tentative de suppression d'un contrat inexistant: 999
+DEBUG 2023-12-04 03:13:24,312 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:13:25,177 contract_management Contrat 2 supprimé avec succès par adm@example.com
+WARNING 2023-12-04 03:13:26,057 contract_management Utilisateur non autorisé tst@example.com a tenté de supprimer le contrat 3
+INFO 2023-12-04 03:13:26,368 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:13:26,368 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:13:26,670 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:13:26,671 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:13:26,970 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:13:26,971 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:13:27,268 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:13:27,270 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:13:27,568 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:13:27,568 contract_management Sortie de la gestion des contrats
+ERROR 2023-12-04 03:13:28,761 contract_management Tentative de réaffectation d'un contrat inexistant: 999
+ERROR 2023-12-04 03:13:28,767 contract_management Tentative de réaffectation à un utilisateur commercial inexistant: non_existent@example.com
+DEBUG 2023-12-04 03:13:28,794 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-04 03:13:28,813 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:13:29,942 contract_management Contrat 5 réaffecté à new_sales@example.com par adm@example.com
+WARNING 2023-12-04 03:13:31,106 contract_management Utilisateur non autorisé tst@example.com a tenté de réaffecter le contrat 6
+INFO 2023-12-04 03:13:32,003 contract_management Tentative de mise à jour du contrat 999 par ges@example.com
+ERROR 2023-12-04 03:13:32,004 contract_management Contrat non trouvé lors de la tentative de mise à jour
+DEBUG 2023-12-04 03:13:32,027 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:13:32,903 contract_management Tentative de mise à jour du contrat 8 par tst@example.com
+WARNING 2023-12-04 03:13:32,903 contract_management Accès refusé pour la modification du contrat
+INFO 2023-12-04 03:13:33,787 contract_management Tentative de mise à jour du contrat 9 par ges@example.com
+INFO 2023-12-04 03:13:33,789 contract_management Contrat 9 mis à jour avec succès
+INFO 2023-12-04 03:14:01,136 client_management Début de l'ajout d'un nouveau client
+INFO 2023-12-04 03:14:01,138 client_management Client John Doe ajouté avec succès
+INFO 2023-12-04 03:14:01,142 client_management Début de l'ajout d'un nouveau client
+WARNING 2023-12-04 03:14:01,142 client_management Accès refusé à l'ajout de client - utilisateur non autorisé
+INFO 2023-12-04 03:14:01,146 client_management Début de la recherche d'un client par ID
+INFO 2023-12-04 03:14:01,148 client_management Client trouvé avec l'ID : 2
+INFO 2023-12-04 03:14:01,152 client_management Affichage de la liste des clients
+INFO 2023-12-04 03:14:01,153 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 03:14:01,158 client_management Tentative de mise à jour d'un client par l'utilisateur: clientuser@example.com
+INFO 2023-12-04 03:14:01,158 client_management Affichage de la liste des clients
+INFO 2023-12-04 03:14:01,160 client_management Liste des clients affichée avec succès
+INFO 2023-12-04 03:14:01,162 client_management Client mis à jour avec succès : Jane Doe
+INFO 2023-12-04 03:14:01,166 client_management Tentative de mise à jour d'un client par l'utilisateur: nonclientuser@example.com
+WARNING 2023-12-04 03:14:01,166 client_management Accès refusé pour la mise à jour du client - permissions insuffisantes
+INFO 2023-12-04 03:14:02,067 contract_management Tentative de création d'un contrat par ges@example.com
+INFO 2023-12-04 03:14:02,067 client_management Affichage de la liste des clients
+INFO 2023-12-04 03:14:02,068 client_management Liste des clients affichée avec succès
+ERROR 2023-12-04 03:14:02,069 contract_management Client introuvable lors de la création d'un contrat
+DEBUG 2023-12-04 03:14:02,093 connectionpool Starting new HTTPS connection (1): o4506331927609344.ingest.sentry.io:443
+DEBUG 2023-12-04 03:14:02,195 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:14:02,963 contract_management Tentative de création d'un contrat par other@example.com
+WARNING 2023-12-04 03:14:02,964 contract_management Accès refusé pour la création de contrat par other@example.com
+ERROR 2023-12-04 03:14:03,849 contract_management Tentative de suppression d'un contrat inexistant: 999
+DEBUG 2023-12-04 03:14:03,874 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:14:04,731 contract_management Contrat 2 supprimé avec succès par adm@example.com
+WARNING 2023-12-04 03:14:05,604 contract_management Utilisateur non autorisé tst@example.com a tenté de supprimer le contrat 3
+INFO 2023-12-04 03:14:05,914 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:14:05,914 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:14:06,212 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:14:06,213 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:14:06,509 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:14:06,510 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:14:06,806 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:14:06,807 contract_management Sortie de la gestion des contrats
+INFO 2023-12-04 03:14:07,103 contract_management Entrée dans la gestion des contrats par test@example.com
+INFO 2023-12-04 03:14:07,104 contract_management Sortie de la gestion des contrats
+ERROR 2023-12-04 03:14:08,273 contract_management Tentative de réaffectation d'un contrat inexistant: 999
+ERROR 2023-12-04 03:14:08,281 contract_management Tentative de réaffectation à un utilisateur commercial inexistant: non_existent@example.com
+DEBUG 2023-12-04 03:14:08,301 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+DEBUG 2023-12-04 03:14:08,320 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:14:09,466 contract_management Contrat 5 réaffecté à new_sales@example.com par adm@example.com
+WARNING 2023-12-04 03:14:10,625 contract_management Utilisateur non autorisé tst@example.com a tenté de réaffecter le contrat 6
+INFO 2023-12-04 03:14:11,512 contract_management Tentative de mise à jour du contrat 999 par ges@example.com
+ERROR 2023-12-04 03:14:11,513 contract_management Contrat non trouvé lors de la tentative de mise à jour
+DEBUG 2023-12-04 03:14:11,536 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:14:12,388 contract_management Tentative de mise à jour du contrat 8 par tst@example.com
+WARNING 2023-12-04 03:14:12,388 contract_management Accès refusé pour la modification du contrat
+INFO 2023-12-04 03:14:13,259 contract_management Tentative de mise à jour du contrat 9 par ges@example.com
+INFO 2023-12-04 03:14:13,262 contract_management Contrat 9 mis à jour avec succès
+INFO 2023-12-04 03:14:20,591 user_management Début de la création d'un nouvel utilisateur
+INFO 2023-12-04 03:14:20,593 user_management Compte créé pour <MagicMock name='create_user().email' id='139673902718240'>
+INFO 2023-12-04 03:14:20,593 user_management Utilisateur validemail@example.com créé avec succès
+INFO 2023-12-04 03:14:20,596 user_management Début de la création d'un nouvel utilisateur
+ERROR 2023-12-04 03:14:20,596 user_management Erreur de validation lors de la création de l'utilisateur : Format d'email invalide.
+INFO 2023-12-04 03:14:20,604 user_management Utilisateur user@example.com supprimé par superuser@example.com
+WARNING 2023-12-04 03:14:20,608 user_management Tentative de suppression de l'utilisateur user@example.com refusée pour nonadminuser@example.com
+DEBUG 2023-12-04 03:14:20,620 connectionpool https://o4506331927609344.ingest.sentry.io:443 "POST /api/4506331936587776/envelope/ HTTP/1.1" 200 0
+INFO 2023-12-04 03:14:20,910 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 03:14:21,209 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 03:14:21,498 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 03:14:21,498 user_management Utilisateur actuellement connecté : testuser@example.com
+INFO 2023-12-04 03:14:22,084 user_management Affichage de la liste des utilisateurs
+INFO 2023-12-04 03:14:22,388 user_management Tentative de connexion pour l'email : testuser@example.com
+INFO 2023-12-04 03:14:22,676 user_management Utilisateur testuser@example.com authentifié avec succès
+INFO 2023-12-04 03:14:22,679 user_management Tentative de connexion pour l'email : invaliduser@example.com
+WARNING 2023-12-04 03:14:22,976 user_management Échec de l'authentification pour l'utilisateur invaliduser@example.com
+INFO 2023-12-04 03:14:23,275 user_management Tentative de connexion pour l'email : testlogout@example.com
+INFO 2023-12-04 03:14:23,562 user_management Utilisateur testlogout@example.com authentifié avec succès
+INFO 2023-12-04 03:14:23,563 user_management Utilisateur actuellement connecté : testlogout@example.com
+INFO 2023-12-04 03:14:23,563 user_management Utilisateur testlogout@example.com déconnecté
+INFO 2023-12-04 03:14:23,563 user_management Aucun utilisateur actuellement connecté
+INFO 2023-12-04 03:14:24,153 user_management Tentative de réaffectation de l'utilisateur : normaluser@example.com au département : ADM
+INFO 2023-12-04 03:14:24,155 user_management Utilisateur normaluser@example.com réaffecté avec succès au département ADM
+INFO 2023-12-04 03:14:24,159 user_management Updating user existing@example.com
+INFO 2023-12-04 03:14:24,164 user_management Updating user target@example.com
+INFO 2023-12-04 03:14:24,168 user_management Compte créé pour validemail@example.com
+WARNING 2023-12-04 03:14:24,174 user_management Erreur de validation lors de la création de l'utilisateur : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre.

@@ -1,9 +1,24 @@
 import os
 import django
+import logging
+import sentry_sdk
 
 # Configuration de l'environnement Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crm_events.settings')
 django.setup()
+
+
+logger = logging.getLogger(__name__)
+
+
+if __name__ == "__main__":
+    logger.info("Démarrage de l'application")
+
+
+sentry_sdk.init(
+    dsn="https://06c9f2cd3ff6e7691aa2488eacbbf2b9@o4506331927609344.ingest.sentry.io/4506331936587776",
+    traces_sample_rate=1.0
+)
 
 # Importations après la configuration de Django
 import user_management as um                    # noqa: E402
@@ -58,6 +73,7 @@ def main_menu():
                 continue
             gerer_events(current_authenticated_user)
         elif choice == '9':
+            logger.info("L'utilisateur a quitté l'application")
             print("Au revoir !")
             break
         else:

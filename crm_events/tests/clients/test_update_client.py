@@ -21,28 +21,26 @@ def test_update_client_permission(mock_client_user):
     client = Client.objects.create(
         full_name="John Doe",
         email="john@example.com",
-        phone_number="123456789",
+        phone_number="+123456789",
         company_name="Doe Inc."
     )
 
-    # Ajouter suffisamment d'entrées pour chaque input dans la fonction
     new_data = [
-        str(client.id),   # ID du client
-        "Jane Doe",       # Nouveau nom complet
+        str(client.id),  # ID du client
+        "Jane Doe",      # Nouveau nom complet
         "jane@example.com",  # Nouvel email
-        "987654321",      # Nouveau numéro de téléphone
+        "+1987654321",   # Nouveau numéro de téléphone (format valide)
         "Doe Enterprises",  # Nouveau nom d'entreprise
-        ""  # ID du nouveau commercial assigné (laisser vide)
+        ""               # ID du nouveau commercial assigné (laisser vide)
     ]
 
     with patch('client_management.input', side_effect=new_data):
-        with patch('client_management.is_valid_email', return_value=True):
-            update_client(mock_client_user)
+        update_client(mock_client_user)
 
     updated_client = Client.objects.get(id=client.id)
     assert updated_client.full_name == "Jane Doe"
     assert updated_client.email == "jane@example.com"
-    assert updated_client.phone_number == "987654321"
+    assert updated_client.phone_number == "+1987654321"
     assert updated_client.company_name == "Doe Enterprises"
 
 
