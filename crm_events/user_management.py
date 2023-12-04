@@ -1,13 +1,14 @@
 import logging
 import os
 import re
+import jwt
 import django
 from django.conf import settings  # Importer les settings de Django
 from django.contrib.auth import authenticate
 from epic_auth_app.models import Utilisateur
 from django.core.exceptions import ValidationError, PermissionDenied
 from prettytable import PrettyTable
-import jwt
+from filtres import filtrer_utilisateurs_par_departement, afficher_utilisateurs
 
 
 logger = logging.getLogger(__name__)
@@ -26,33 +27,50 @@ def input_with_prompt(prompt):
 
 def gerer_utilisateurs(current_authenticated_user):
     while True:
+        logger.info("Menu de gestion des utilisateurs affiché")
         print("\n\033[38;5;202mGestion des Utilisateurs\033[0m\n")
         print("1. Afficher tous les Utilisateurs")
         print("2. Créer un nouvel Utilisateur")
         print("3. Supprimer un Utilisateur")
         print("4. Réaffecter un Utilisateur")
         print("5. Mettre à jour un Utilisateur")
-        print("6. Revenir au menu précédent\n")
+        print("6. Filtrer les utilisateurs par Département")
+        print("7. Revenir au menu précédent\n")
 
         user_action = input("\033[96mChoisissez l'action : \033[0m")
+        logger.info(f"Action choisie par l'utilisateur : {user_action}")
 
         if user_action == '1':
+            logger.info("Option choisie : Afficher tous les Utilisateurs")
             list_users()
         elif user_action == '2':
+            logger.info("Option choisie : Créer un nouvel Utilisateur")
             create_user()
         elif user_action == '3':
+            logger.info("Option choisie : Supprimer un Utilisateur")
             email_to_delete = input("Entrez l'email de l'utilisateur à supprimer : ")
             delete_user(current_authenticated_user.email, email_to_delete)
         elif user_action == '4':
+            logger.info("Option choisie : Réaffecter un Utilisateur")
             email_to_reassign = input("Entrez l'email de l'utilisateur à réaffecter : ")
             new_department = input("Entrez le nouveau département : ")
             reassign_user(email_to_reassign, new_department, current_authenticated_user.email)
         elif user_action == '5':
+            logger.info("Option choisie : Mettre à jour un Utilisateur")
             email_to_update = input("Entrez l'email de l'utilisateur à mettre à jour : ")
             update_user(current_authenticated_user, email_to_update)
         elif user_action == '6':
+            logger.info("Option choisie : Filtrer les utilisateurs par Département")
+            print("Choisissez un département pour filtrer :")
+            print("ADM - Administration, GES - Gestion, COM - Commercial, SUP - Support, AUT - Autres")
+            departement_code = input("Entrez le code du département : ")
+            utilisateurs = filtrer_utilisateurs_par_departement(departement_code)
+            afficher_utilisateurs(utilisateurs)
+        elif user_action == '7':
+            logger.info("Retour au menu principal")
             break
         else:
+            logger.warning("Choix invalide entré dans le menu de gestion des utilisateurs")
             print("\033\n[91mChoix invalide. Veuillez réessayer.\033\n[0m")
 
 

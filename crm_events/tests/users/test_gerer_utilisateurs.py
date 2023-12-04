@@ -23,7 +23,7 @@ def test_gerer_utilisateurs(capfd):
     )
 
     # Simuler les entrées de l'utilisateur pour différentes actions
-    with patch('builtins.input', side_effect=["1", "6"]):  # "1" pour afficher, "6" pour quitter
+    with patch('builtins.input', side_effect=["1", "6", "ADM", "7"]):  # "1" pour afficher, "6" pour filtrer, "ADM" pour le code de département, "7" pour quitter
         gerer_utilisateurs(current_authenticated_user)
 
     # Capturer la sortie
@@ -36,7 +36,6 @@ def test_gerer_utilisateurs(capfd):
     assert "Supprimer un Utilisateur" in out
     assert "Réaffecter un Utilisateur" in out
     assert "Mettre à jour un Utilisateur" in out
+    assert "Filtrer les utilisateurs par Département" in out
     assert "Revenir au menu précédent" in out
     assert "testuser@example.com" in out  # Vérifie que la liste des utilisateurs s'affiche
-
-    # Ajouter d'autres assertions pour vérifier les fonctionnalités spécifiques de chaque option du menu

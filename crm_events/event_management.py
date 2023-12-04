@@ -6,6 +6,8 @@ from prettytable import PrettyTable
 from epic_contracts_app.models import Contrat
 from datetime import datetime
 from django.utils.timezone import make_aware
+from filtres import filtrer_evenements_sans_support, afficher_evenements
+
 
 logger = logging.getLogger(__name__)
 
@@ -248,7 +250,8 @@ def gerer_events(current_user):
         print("3. Modifier un événement")
         print("4. Supprimer un événement")
         print("5. Réaffecter un événement")
-        print("6. Retourner au menu principal")
+        print("6. Filtrer les événements sans support")
+        print("7. Retourner au menu principal")
 
         choix = input("Choisissez une option: ")
 
@@ -263,6 +266,12 @@ def gerer_events(current_user):
         elif choix == '5':
             reassign_event(current_user)
         elif choix == '6':
+            if current_user.department == 'GES':
+                evenements = filtrer_evenements_sans_support()
+                afficher_evenements(evenements)
+            else:
+                print("\n\033[91mAccès refusé. Seuls les utilisateurs GES peuvent effectuer cette action.\033\n[0m")
+        elif choix == '7':
             break
         else:
             print("\n\033[91mChoix invalide. Veuillez réessayer.\033\n[0m")

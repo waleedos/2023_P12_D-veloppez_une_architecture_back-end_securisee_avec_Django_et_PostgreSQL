@@ -5,6 +5,7 @@ from epic_clients_app.models import Client
 from epic_auth_app.models import Utilisateur
 from client_management import list_clients
 from django.core.exceptions import ValidationError
+from filtres import filtrer_contrats_non_signes, filtrer_contrats_non_entierement_payes, afficher_contrats
 from django.utils import timezone
 from prettytable import PrettyTable
 
@@ -229,7 +230,9 @@ def gerer_contrats(current_user):
         print("3. Modifier un contrat")
         print("4. Supprimer un contrat")
         print("5. Réaffecter un contrat")
-        print("6. Revenir au menu principal\n")
+        print("6. Afficher les contrats non signés")
+        print("7. Afficher les contrats non entièrement payés")
+        print("8. Revenir au menu principal\n")
 
         choix = input("\033[96mChoisissez une action: \033[0m")
         if choix == '1':
@@ -246,6 +249,12 @@ def gerer_contrats(current_user):
             contrat_id = input("Entrez l'ID du contrat à réaffecter : ")
             reassign_contrat(current_user, contrat_id)
         elif choix == '6':
+            contrats = filtrer_contrats_non_signes()
+            afficher_contrats(contrats)
+        elif choix == '7':
+            contrats = filtrer_contrats_non_entierement_payes()
+            afficher_contrats(contrats)
+        elif choix == '8':
             logger.info("Sortie de la gestion des contrats")
             break
         else:
