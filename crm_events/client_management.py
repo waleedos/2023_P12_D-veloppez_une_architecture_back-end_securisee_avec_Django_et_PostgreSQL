@@ -75,9 +75,12 @@ def get_client_by_id():
                 return None
 
 
-def validate_name(name):
+def validate_name(name, updating=False):
+    if updating and not name:
+        return name  # Permet de laisser le champ vide pour une mise à jour
     if not re.fullmatch(r'^[A-Za-z\s]+$', name):
         raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
+    return name
 
 
 def validate_email(email):
@@ -187,43 +190,37 @@ def update_client(current_user):
         client_id = input("Enter the ID of the client to update: ").strip()
         client = Client.objects.get(id=client_id)
 
-        while True:
-            try:
-                new_full_name = input("Enter new full name (leave blank to not change): ").strip()
-                new_email = input("Enter new email (leave blank to not change): ").strip()
-                new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
-                new_company_name = input("Enter new company name (leave blank to not change): ").strip()
-                new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
+        new_full_name = input("Enter new full name (leave blank to not change): ").strip()
+        new_email = input("Enter new email (leave blank to not change): ").strip()
+        new_phone_number = input("Enter new phone number (leave blank to not change): ").strip()
+        new_company_name = input("Enter new company name (leave blank to not change): ").strip()
+        new_commercial_assigne_id = input("Enter new commercial ID (leave blank to not change): ").strip()
 
-                if new_full_name:
-                    validate_name(new_full_name)
-                    client.full_name = new_full_name
-                if new_email:
-                    validate_email(new_email)
-                    client.email = new_email
-                if new_phone_number:
-                    validate_phone_number(new_phone_number)
-                    client.phone_number = new_phone_number
-                if new_company_name:
-                    client.company_name = new_company_name
-                if new_commercial_assigne_id:
-                    new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
-                    client.commercial_assigne = new_commercial
+        if new_full_name:
+            client.full_name = validate_name(new_full_name, updating=True)
+        if new_email:
+            validate_email(new_email)
+            client.email = new_email
+        if new_phone_number:
+            validate_phone_number(new_phone_number)
+            client.phone_number = new_phone_number
+        if new_company_name:
+            client.company_name = new_company_name
+        if new_commercial_assigne_id:
+            new_commercial = Utilisateur.objects.get(id=new_commercial_assigne_id)
+            client.commercial_assigne = new_commercial
 
-                client.updated_at = timezone.now()
-                client.save()
-                logger.info(f"Client mis à jour avec succès : {client.full_name}")
-                print(f"\n\033[92mClient {client.full_name} mis à jour avec succès.\033\n[0m")
-                break
+        client.updated_at = timezone.now()
+        client.save()
+        logger.info(f"Client mis à jour avec succès : {client.full_name}")
+        print(f"\n\033[92mClient {client.full_name} mis à jour avec succès.\033\n[0m")
 
-            except ValueError as e:
-                logger.error(f"Erreur lors de la mise à jour du client : {e}")
-                print(e)
-            except Utilisateur.DoesNotExist:
-                logger.error("Commercial assigné introuvable.")
-                print("Commercial not found.")
-                continue
-
+    except ValueError as e:
+        logger.error(f"Erreur lors de la mise à jour du client : {e}")
+        print(e)
+    except Utilisateur.DoesNotExist:
+        logger.error("Commercial assigné introuvable.")
+        print("Commercial not found.")
     except Client.DoesNotExist:
         logger.error(f"Client introuvable pour l'ID : {client_id}")
         print("\n\033[91mClient not found.\033\n[0m")

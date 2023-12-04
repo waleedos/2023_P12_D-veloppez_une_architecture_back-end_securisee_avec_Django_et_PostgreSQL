@@ -29,7 +29,7 @@ def test_update_client_permission(mock_client_user):
         str(client.id),  # ID du client
         "Jane Doe",      # Nouveau nom complet
         "jane@example.com",  # Nouvel email
-        "+1987654321",   # Nouveau numéro de téléphone (format valide)
+        "+1987654321",   # Nouveau numéro de téléphone
         "Doe Enterprises",  # Nouveau nom d'entreprise
         ""               # ID du nouveau commercial assigné (laisser vide)
     ]

@@ -12,10 +12,13 @@ from filtres import filtrer_evenements_sans_support, afficher_evenements
 logger = logging.getLogger(__name__)
 
 
-def validate_name(name):
+def validate_name(name, updating=False):
+    if updating and not name:
+        return None  # Permet de laisser le champ vide pour une mise à jour
     if not re.fullmatch(r'^[A-Za-z\s]+$', name):
         raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
     return name
+
 
 
 def validate_attendees(input_str):
@@ -150,9 +153,9 @@ def update_event(current_user):
         return
 
     try:
-        nom = validate_name(input("Entrez le nouveau nom de l'événement (laissez vide pour ne pas changer) : "))
+        nom = input("Entrez le nouveau nom de l'événement (laissez vide pour ne pas changer) : ")
         if nom:
-            evenement.nom = nom
+            evenement.nom = validate_name(nom, updating=True)
 
         lieu = input("Entrez le nouveau lieu de l'événement (laissez vide pour ne pas changer) : ")
         if lieu:
@@ -172,29 +175,19 @@ def update_event(current_user):
 
         date_debut_str = input("Entrez la nouvelle date de début (YYYY-MM-DD HH:MM, laissez vide pour ne pas changer) : ")
         if date_debut_str:
-            try:
-                evenement.date_debut = make_aware(datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M'))
-            except ValueError:
-                print("\n\033[91mFormat de date de début invalide.\033N[0m")
-                return
+            evenement.date_debut = make_aware(datetime.strptime(date_debut_str, '%Y-%m-%d %H:%M'))
 
         date_fin_str = input("Entrez la nouvelle date de fin (YYYY-MM-DD HH:MM, laissez vide pour ne pas changer) : ")
         if date_fin_str:
-            try:
-                evenement.date_fin = make_aware(datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M'))
-            except ValueError:
-                print("\n\033[91mFormat de date de fin invalide.\033\n[0m")
-                return
+            evenement.date_fin = make_aware(datetime.strptime(date_fin_str, '%Y-%m-%d %H:%M'))
 
         evenement.save()
         print(f"\n\033[92mÉvénement '{evenement.nom}' mis à jour avec succès.\033\n[0m")
 
     except ValueError as e:
         print(f"\n\033[91mErreur : {e}\033\n[0m")
-        return
     except Exception as e:
         print(f"\n\033[91mUne erreur s'est produite : {e}\033\n[0m")
-        return
 
 
 def delete_event(current_user):

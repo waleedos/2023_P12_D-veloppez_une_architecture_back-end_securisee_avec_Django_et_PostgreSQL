@@ -105,7 +105,9 @@ def validate_and_create_user(email, password, first_name, last_name, phone_numbe
         return None
 
 
-def validate_name(name):
+def validate_name(name, updating=False):
+    if updating and not name:
+        return None  # Permet de laisser le champ vide pour une mise à jour
     if not re.fullmatch(r'^[A-Za-z\s]+$', name):
         raise ValueError("Le nom doit contenir uniquement des caractères alphabétiques et des espaces.")
     return name
@@ -197,36 +199,33 @@ def update_user(current_user, user_to_update_email):
         print("\033[91mVous n'avez pas les permissions requises des départements ADM ou GES.\033[0m\n")
         return
 
-    while True:
-        try:
-            new_email = input("Entrez le nouvel email (laissez vide pour ne pas changer) : ").strip()
-            if new_email:
-                validate_email(new_email)
-                user_to_update.email = new_email
-            new_first_name = input("Entrez le nouveau prénom (laissez vide pour ne pas changer) : ").strip()
-            if new_first_name:
-                validate_name(new_first_name)
-                user_to_update.first_name = new_first_name
-            new_last_name = input("Entrez le nouveau nom de famille (laissez vide pour ne pas changer) : ").strip()
-            if new_last_name:
-                validate_name(new_last_name)
-                user_to_update.last_name = new_last_name
-            new_phone = input("Entrez le nouveau numéro de téléphone (laissez vide pour ne pas changer) : ").strip()
-            if new_phone:
-                validate_phone_number(new_phone)
-                user_to_update.phone = new_phone
-            break
-        except ValueError as e:
-            print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
-
     try:
+        new_email = input("Entrez le nouvel email (laissez vide pour ne pas changer) : ").strip()
+        if new_email:
+            validate_email(new_email)
+            user_to_update.email = new_email
+
+        new_first_name = input("Entrez le nouveau prénom (laissez vide pour ne pas changer) : ").strip()
+        if new_first_name:
+            user_to_update.first_name = validate_name(new_first_name, updating=True)
+
+        new_last_name = input("Entrez le nouveau nom de famille (laissez vide pour ne pas changer) : ").strip()
+        if new_last_name:
+            user_to_update.last_name = validate_name(new_last_name, updating=True)
+
+        new_phone = input("Entrez le nouveau numéro de téléphone (laissez vide pour ne pas changer) : ").strip()
+        if new_phone:
+            validate_phone_number(new_phone)
+            user_to_update.phone = new_phone
+
         user_to_update.save()
+        print("\033[92mUtilisateur mis à jour.\033\n[0m\n")
+
+    except ValueError as e:
+        print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
     except Exception as e:
         logger.error(f'Erreur lors de la création de l’utilisateur : {e}')
         print("\033[91mErreur lors de la mise à jour de l'utilisateur.\033[0m")
-        return
-
-    print("\033[92mUtilisateur mis à jour.\033\n[0m\n")
 
 
 def get_current_user():
