@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'epic_clients_app',
     'epic_contracts_app',
     'epic_events_app',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
