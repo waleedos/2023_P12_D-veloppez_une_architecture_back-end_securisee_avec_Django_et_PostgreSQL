@@ -1,7 +1,7 @@
 <h1 align="center">OC Project N°12  -  Epic_Events CRM's</h1>
 <h2 align="center">P12 Développez une architecture back-end sécurisée avec Python et SQL</h1>
 
-![Logo LITReview](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/entete.png)
+![Logo LITReview](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/entete.png)
 
 
 ## Compétences aquises et évaluées de ce projet : 
@@ -23,7 +23,7 @@
 
 
 
-## Contribuer au projet :
+## Introduction :
 Epic_Events CRM's est un système CRM (Customer Relationship Management) sécurisé interne à l'entreprise, élaboré pour collecter et traiter les données des clients et de leurs événements.  La société Epic Events est une entreprise de conseil et de gestion dans l'événementiel qui répond aux besoins des start-up voulant organiser des « fêtes épiques » .
 
 ## Auteurs
@@ -44,18 +44,18 @@ L'équipe a dressé une liste de document pour cette mission :
 - **Le guide d'étapes clés**    : [Le guide d'étapes clés pour l'avancement du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/3.Guide-%C3%A9tapes-cl%C3%A9s.pdf) 
 
 
-## Voici La stucture actuelle et finale de ce projet :
+### Voici La stucture actuelle et finale de ce projet :
 
 - **La stucture du projet**    : [La stucture du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/structure_de_ce_projet.txt).
 
 
 
-## La base de données : 
+### La base de données : 
 
 
 
 
-## Comment cloner ce référentiel GitHub: 
+### Comment cloner ce référentiel GitHub: 
 
 Vous pouvez cloner et forker le repo en totalité via HTTPS:
 ``` 
@@ -67,8 +67,8 @@ Vous pouvez aussiz cloner et forker le repo en totalité via SSH:
 git clone git@github.com:waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL.git
 ```
 
-Ou encore, vous pouvez télécharger le dossier entier compressé (.zip)
-[Téléchargez le dossier complet de ce projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/archive/refs/heads/main.zip).
+Ou encore, vous pouvez télécharger le dossier entier compressé (.zip) :
+- [Téléchargez le dossier complet de ce projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/archive/refs/heads/main.zip).
 
 
 ### Accédez à la racine du projet:
@@ -93,40 +93,55 @@ La sortie de cette commande devra vous afficher les dossiers et fichiers suivant
 python -m venv venv
 ```
 
-## Activer l'environnement virtuel Python:
-
-### Sur Windows : 
+### Activer l'environnement virtuel Python:
 ```
-.\env\Scripts\activate
-```
-
-### Sur Linux :
-```
-source venv/bin/activate
+source env/bin/activate  # Sur Linux/Mac
+env\Scripts\activate  # Sur Windows
 ```
 
-## Importez et installez tous les modules:
+### Importez et installez tous les modules:
 ```
 pip install -r requirements.txt
 ```
 
-#################################################################################################
-
-## Démarrage du serveur Flask :
-Une fois tout ce qui précède est fait, démarrez flask avec la commande suivante :
+### Création d'un SuperUtilisateur:
 ```
-flask run
+# assurez vous que vous etes toujours dans le dossier /crm_events, sinon 
+cd crm_events
+
+# puis
+python manage.py createsuperuser
+```
+
+Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d'utilisateur, une adresse e-mail et un mot de passe pour le nouveau SuperUtilisateur. Suivez les instructions à l'écran pour compléter la création de ce compte.
+
+Ce SuperUtilisateur aura accès à l'interface d'administration de Django et pourra gérer l'ensemble du site, ce qui inclut la capacité de créer, modifier et supprimer des utilisateurs, ainsi que d'effectuer d'autres tâches administratives.
+
+### Démarrage du serveur :
+```
+# assurez vous que vous etes toujours dans le dossier /crm_events, sinon 
+cd crm_events
+
+# puis
+python manage.py runserver
 ```
 
 ### Il est temps maintenant de démarrer l'application sur votre navigateur :
 Ouvrez votre navigateur et naviguez vers une des deux adresse suivantes :
 ```
-http://127.0.0.1:5000
+http://127.0.0.1:8000/admin
 
-ou bien
+# ou bien
 
-http://localhost:5000```
+http://localhost:8000/admin
 ```
+
+#### Connectez vous en tant que SuperUtilisateur : 
+Remplissez les identifiants (E-mail et Password) avec les quels vous avez créé votre SuperUtilisateur, et validez.
+
+![Vous verrez l'ecran suivant](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/log_in_admin.png)
+
+
 
 # Les tests : 
 Dans ce projet, plus de 58 tests en tout et pour tout ont été élaborés comme suit : 
