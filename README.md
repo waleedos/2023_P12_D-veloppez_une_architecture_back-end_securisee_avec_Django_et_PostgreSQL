@@ -104,6 +104,52 @@ env\Scripts\activate  # Sur Windows
 pip install -r requirements.txt
 ```
 
+### Créer un Fichier .env à la racine du projet (dans le dossier crm_events): 
+```
+mkdir .env
+```
+
+### Générer une nouvelle clé secrète, vous pouvez utiliser la console Python:
+- Démarrez la console python 
+```
+python
+# ou
+python3
+```
+- Copier/coller le code suivant et validez :
+```
+from django.core.management.utils import get_random_secret_key
+print(get_random_secret_key())
+```
+Vous allez voir que python a généréré une SECRET_KEY du style :
+```
+j^$-6tjo-s45j(6)-_=fmb%p4+2enehxlmsuzy8szmozlhc5^6
+```
+
+### Générer une nouvelle JWT_SECRET_KEY toujours avec la console Python:
+- Copier/coller le code suivant et validez :
+```
+import os
+print(os.urandom(24).hex())
+```
+Vous allez voir que python a généréré une JWT_SECRET_KEY du style :
+```
+daae87ae289ac5f6b89a0ffb0a82ee99cc1a1af95b0669e2
+```
+### Remplissez le fichier .env créé avec les informations créés suivantes (à titre d'exemple):
+```
+SECRET_KEY="votre clé que python viens de générer"
+JWT_SECRET_KEY=daae87ae289ac5f6b89a0ffb0a82ee99cc1a1af95b0669e2
+DEBUG=True
+DB_NAME=crm_events
+DB_USER=Non_utilisateur_de_la_base_de_donnée_postgres
+DB_PASSWORD="un_password"
+DB_HOST=localhost
+DB_PORT=5432
+```
+et enregistrer le fichier
+
+
 ### Création d'un SuperUtilisateur:
 ```
 # assurez vous que vous etes toujours dans le dossier /crm_events, sinon 
@@ -112,10 +158,15 @@ cd crm_events
 # puis
 python manage.py createsuperuser
 ```
+Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d'utilisateur, une adresse e-mail et un mot de passe pour le nouveau SuperUtilisateur. Suivez les instructions à l'écran pour compléter la création de ce compte. Suivez les etape dans la console en entrant par-exemple : 
 
-Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d'utilisateur, une adresse e-mail et un mot de passe pour le nouveau SuperUtilisateur. Suivez les instructions à l'écran pour compléter la création de ce compte.
+- e-mail : admin@admin.com
+- Prénom : admin
+- Nom    : admin
+- Passwor: votre mots de pass
 
 Ce SuperUtilisateur aura accès à l'interface d'administration de Django et pourra gérer l'ensemble du site, ce qui inclut la capacité de créer, modifier et supprimer des utilisateurs, ainsi que d'effectuer d'autres tâches administratives.
+
 
 ### Démarrage du serveur :
 ```
@@ -141,7 +192,7 @@ Remplissez les identifiants (E-mail et Password) avec les quels vous avez créé
 
 ![Vous verrez l'ecran suivant](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/log_in_admin.png)
 
-
+###########################################################################"
 
 # Les tests : 
 Dans ce projet, plus de 58 tests en tout et pour tout ont été élaborés comme suit : 
