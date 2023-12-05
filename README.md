@@ -38,18 +38,19 @@ Après avoir organisé des centaines d’évènements, Epic Events a plusieurs d
 Nous avons décidé d'adopter une approche proactive pour remédier à la situation, en élaborant un système CRM sécurisé interne à l'entreprise, qui nous aiderait à collecter et à traiter les données des clients et de leurs événements. Cela devrait rassurer nos clients et, espérons-le, leur redonner confiance en nous en leur montrant que nous prenons les choses au sérieux.
 
 L'équipe a dressé une liste de document pour cette mission : 
-    - [La Mission](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/1.Mission.pdf).
-    - [Le cahier des charges](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/2.Cahier-des-charges.pdf).
-    - [Le guide d'étapes clés pour l'avancement du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/3.Guide-%C3%A9tapes-cl%C3%A9s.pdf) 
+
+- **La Mission**                : [La Mission](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/1.Mission.pdf).
+- **Le cahier des charges**     : [Le cahier des charges](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/2.Cahier-des-charges.pdf).
+- **Le guide d'étapes clés**    : [Le guide d'étapes clés pour l'avancement du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/Mission/3.Guide-%C3%A9tapes-cl%C3%A9s.pdf) 
 
 
-## La stucture actuelle et finale de ce projet :
+## Voici La stucture actuelle et finale de ce projet :
 
-    - [La structure de ce projet](https://github.com/waleedos/2023_P11_Ameliorer-app-Web_Python-par-des-tests-et-du-d-bogage_GUDLFT/blob/QA/docs/Mission/3-Structure_actuelle_de_ce_projet_fini.pdf).
+- **La stucture du projet**    : [La stucture du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/structure_de_ce_projet.txt).
 
 
 
-## base donnée : 
+## La base de données : 
 
 L'application est alimentée par des fichiers JSON. Il s’agit de contourner la présence d'une base de données jusqu’à ce que nous en ayons réellement besoin. Les principaux fichiers .json sont :
 1. Competitions.json - liste des compétitions : Voici la liste de toutes les compétitions existantes dans ce projet :
