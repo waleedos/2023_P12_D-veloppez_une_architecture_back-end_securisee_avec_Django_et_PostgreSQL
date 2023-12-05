@@ -1,0 +1,62 @@
+├── crm_events
+│   ├── crm_events
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   │
+│   ├── epic_auth_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── management
+│   │   │   └── createadmin.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   │
+│   ├── epic_clients_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   │
+│   ├── epic_contracts_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   │
+│   ├── epic_events_app
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   │
+│   ├── tests (Total: 49 tests)
+│   │   ├── clients  (07 tests)
+│   │   ├── contrats (18 tests)
+│   │   ├── events   (06 tests)
+│   │   └── users    (18 tests)
+│   │       
+│   ├── debug.log
+│   ├── client_management.py
+│   ├── contract_management.py
+│   ├── event_management.py
+│   └── user_management.py
+│   ├── filtres.py
+│   ├── main.py
+│   ├── manage.py
+│   ├── pytest.ini
+│   │requirements.txt
+│   │structure_de_ce_projet.txt
+│   │
+├── docs
+│   ├── Mission
+│   │   ├── 1.Mission.pdf
+│   │   ├── 2.Cahier-des-charges.pdf
+│   │   ├── 3.Guide-étapes-clés.pdf
+│   │   └── 4.Logique_du_Métier.pdf
+└── └── my_project.png
