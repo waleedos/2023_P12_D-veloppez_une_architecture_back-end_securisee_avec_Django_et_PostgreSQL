@@ -270,6 +270,14 @@ Dans le dossier principale du projet : /crm_events, démarrez le projet avec la 
 python main.py
 ```
 
+### Les 5 Menus principaux de l'application :
+
+Quand vous démarrez l'application CRM en CLI, c'est à dire en ligne de commande, voici le 5 menus principaux de cette dernère : 
+
+![Les Menus Principaux](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/crm-cli.png)
+
+
+
 ####################################################################################################"
 
 
