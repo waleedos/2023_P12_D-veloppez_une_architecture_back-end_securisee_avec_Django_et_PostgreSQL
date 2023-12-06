@@ -44,9 +44,20 @@ L'équipe a dressé une liste de document pour cette mission :
 
 - **La structure du projet** : [La structure du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/structure_de_ce_projet.txt).
 
+### 4 applications differentes pour ce projet : 
+- epic_auth_app         : Pour gérer les utulisateurs.
+- epic_clients_app      : Pour gérer les clients.
+- epic_contracts_app    : Pour gérer les contrats.
+- epic_events_app       : Pour gérer les événements.
+
+### 5 fichiers principaux, gérent la totalités des fonctions de ce projet :
+- user_management.py    : qui totalise toutes les fonctions des utilisateurs à part le filtrage.
+- client_management.py  : qui totalise toutes les fonctions des clients à part le filtrage.
+- contract_management.py: qui totalise toutes les fonctions des contrats à part le filtrage.
+- event_management.py   : qui totalise toutes les fonctions des événements à part le filtrage.
+- filtres.py            : qui totalise toutes les fonctions de filtrage.
 
 ### Comment cloner ce référentiel GitHub: 
-
 Vous pouvez cloner et forker le repo en totalité via HTTPS:
 ``` 
 git clone https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL.git
@@ -80,23 +91,19 @@ La sortie de cette commande devra vous afficher les dossiers et fichiers suivant
 ```
 python -m venv venv
 ```
-
 ### Activer l'environnement virtuel Python:
 ```
 source env/bin/activate # Sur Linux/Mac
 env\Scripts\activate # Sur Windows
 ```
-
 ### Importez et installez tous les modules:
 ```
 pip install -r requirements.txt
 ```
-
 ### Créer un Fichier .env à la racine du projet (dans le dossier crm_events): 
 ```
 mkdir .env
 ```
-
 ### Générer une nouvelle clé secrète, vous pouvez utiliser la console Python:
 - Démarrez la console python 
 ```
@@ -176,21 +183,18 @@ Si vous avez un message vous disant que cette base de donnée existe deja, cela 
 Vous pouvez vérifier l’existence des données dans la base de donnée, par exemple via l'interface graphique de Django (Admin), si vous ne trouvez pas les données déjà existants, restaurer la Base de Données à partir du Backup :
 
 ### Restaurer la Base de Données à partir du Backup :
-
 Utilisez la sauvegarde ma_bdd_backup.sql disponible dans le dépôt GitHub pour restaurer les données dans la base de données nouvellement créée :
 ```
 psql -U votre_nom_utilisateur_postgres -d crm_events -a -f ma_bdd_backup.sql
 ```
 
 ### Revérifiez bien les Variables d'Environnement :
-
 Assurez-vous que les informations de connexion à la base de données dans le fichier .env correspondent à la base de données PostgreSQL que vous venez de créer :
 DB_NAME : Le nom de la base de données doit correspondre à celui que vous avez créé.
 DB_USER : Le nom d'utilisateur PostgreSQL que vous avez utilisé pour la restauration de la sauvegarde.
 DB_PASSWORD : Le mot de passe de l'utilisateur PostgreSQL.
 
 ### Exécuter les Migrations Django :
-
 Une fois que la base de données est configurée et restaurée, vous pouvez exécuter les migrations Django pour créer les tables nécessaires dans la base de données :
 ```
 python manage.py makemigrations
@@ -201,28 +205,7 @@ python manage.py migrate
 ## Avertissement de Sécurité : 
 Les informations contenues dans le tableau suivant sont présentées uniquement à des fins de démonstration et de test. Dans un environnement de production réel, il est fortement déconseillé de stocker ou de partager des informations sensibles de cette manière, en raison des risques évidents de sécurité et de confidentialité. Ce tableau est mis en ligne dans ce format spécifique pour faciliter la tâche des utilisateurs souhaitant tester et évaluer ce projet. Veuillez vous assurer de traiter toutes les données sensibles avec les précautions de sécurité adéquates dans vos applications.
 
-        | Département |             Utilisateur            |  Password  |  Prénom  |     Nom     |
-        |:-----------:|:----------------------------------:|:----------:|:--------:|:-----------:|
-        |     ADM     |    adm2@epic-events.com            |  Base1234  |   Adam   |    SMITH    |
-        |     ADM     |    adm3@epic-events.com            |  Base9876  |  Pamela  |  ANDERSON   |
-        |             |                                    |            |          |             |
-        |     GES     |    ges1@epic-events.com            | Bigar1234  |  Romin   |   LEFEBRE   |
-        |     GES     |    ges2@epic-events.com            | Bagar9876  |  Amelie  |    DUPON    |
-        |     GES     |    ges3@epic-events.com            |  Base1234  |  Bruno   |   RUDFORD   |
-        |     GES     |    ges4@epic-events.com            |  Base9876  |  Nancie  |   COUREL    |
-        |             |                                    |            |          |             |
-        |     COM     |    com1@epic-events.com            | Arizon1234 |  Julien  |    ABRON    |
-        |     COM     |    com2@epic-events.com            | AriZon9876 | Lucette  |  GHORBAL    |
-        |     COM     |    com3@epic-events.com            | Arnold8877 |   Jean   |   BERNARD   |
-        |     COM     |    com4@epic-events.com            | Ardise6565 |   Katia  |  KAMOVICH   |
-        |     COM     |    com5@epic-events.com            |  Base2345  |  Abdel   |   FOURATI   |
-        |             |                                    |            |          |             |
-        |     SUP     |    sup1@epic-events.com            | Crypto8787 |  Ahmed   |   KHALIF    |
-        |     SUP     |    sup2@epic-events.com            | Crypto9898 |  Simone  |   RENARD    |
-        |     SUP     |    sup3@epic-events.com            | Crypos0123 |  Velery  |    JUDON    |
-        |     SUP     |    sup4@epic-events.com            | Crypos5678 |  Malik   |   CHANTAL   |
-        |             |                                    |            |          |             |
-        |     TST     |    tst1@epic-events.com            |  Tests1234 |   Test   |   LETEST    |
+![Liste des identifiants](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/Identifiants.png)
 
 
 ### Démarrage du serveur :
@@ -238,9 +221,7 @@ python manage.py runserver
 Ouvrez votre navigateur et naviguez vers une des deux adresse suivantes :
 ```
 http://127.0.0.1:8000/admin
-
 # ou bien
-
 http://localhost:8000/admin
 ```
 
@@ -250,33 +231,127 @@ Remplissez les identifiants (E-mail et Password) avec les quels vous avez créé
 ![Vous verrez l'ecran suivant](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/log_in_admin.png)
 
 ## Démarrez le CLI : 
-
 Dans le dossier principale du projet : /crm_events, démarrez le projet avec la commande suivante : 
 ```
 python main.py
 ```
 
 ### Les 5 Menus principaux de l'application :
-
 Quand vous démarrez l'application CRM en CLI, c'est à dire en ligne de commande, voici le 5 menus principaux de cette dernière : 
 
 ![Les Menus Principaux](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/crm-cli.png)
 
 
 ## Les tests : :
+Nous avons principalement, comme mentionné au début, quatre applications différentes dans ce projet CRM : 
 
+tous les models existants dans ce projet sont répartis dna les 4 applications : epic_auth_app, epic_clients_app, epic_contracts_app, et epic_events_app
 
-## Les "blogger" en "live" :
+Et toutes les fonctions existantes dans ce projet, sont réparties dans ces 5 fichier : user_management.py, client_management.py, contract_management.py, event_management.py et filtres.py 
+
+Afin d’assurer le bon fonctionnement du projet, ainsi que sa stabilité permanente, nous avons élaboré plus de 49 tests unitaires pour ce projet ; Tous les tests sont présents dans le dossier /tests qui se trouve à la racine du projet, et que nous les contons comme suit : 
+
+                │   ├── tests
+                │   │   ├── clients
+                │   │   │   ├── test_add_client.py
+                │   │   │   ├── test_get_client_by_id.py
+                │   │   │   ├── test_is_valid_email.py
+                │   │   │   ├── test_list_clients.py
+                │   │   │   └── test_update_client.py
+                │   │   ├── contrats
+                │   │   │   ├── test_create_contrat.py
+                │   │   │   ├── test_delete_contrat.py
+                │   │   │   ├── test_gerer_contrats.py
+                │   │   │   ├── test_reassign_contrat.py
+                │   │   │   └── test_update_contrat.py
+                │   │   ├── events
+                │   │   │   ├── test_create_event.py
+                │   │   │   └── test_list_events.py
+                │   │   └── users
+                │   │       ├── test_create_user.py
+                │   │       ├── test_delete_user.py
+                │   │       ├── test_gerer_utilisateurs.py
+                │   │       ├── test_get_current_user.py
+                │   │       ├── test_list_users.py
+                │   │       ├── test_login.py
+                │   │       ├── test_logout.py
+                │   │       ├── test_reassign_user.py
+                │   │       ├── test_update_user.py
+                │   │       ├── test_validate_and_create_user.py
+                │   │       └── test_validate_password_strength.py
+
+En gros nous avons dans le dossier test/ ce qui suit :
+- dosiier users/      (18 tests pour les fonctions des utilisateurs)  
+- dossier clients/    (07 tests pour les fonctions des clients)
+- dossier contrats/   (18 tests pour les fonctions des contrats)
+- dossier events/     (06 tests pour les fonctions des événements)
+
+### Execution de test unitaire : 
+si vous voulez executer un tests unitaire bien précis, par exemple le test (test_create_user.py), suivant la commande suivante :
+```
+pytest tests/users/test_create_user.py
+```
+
+### Execution d'un ensemble de tests (par exemple, tous les tests users):
+```
+pytest tests/users/
+```
+
+### Execution d'un ensemble de tests (par exemple, tous les tests users):
+```
+pytest tests/users/
+```
+
+### Execution globale de tous les tests :
+```
+pytest
+```
 
 ## La journalisation totale avec "Sentry" :
+Sentry est un service de suivi des erreurs qui permet de consigner, de surveiller et de résoudre les problèmes dans les applications en temps réel, et cela implique la consignation et le suivi des événements qui se produisent lors de l'exécution de l'application.
+
+### Installation du SDK Sentry :
+```
+pip install --upgrade sentry-sdk
+```
+Puis, allez sur le site officiel de sentry.io, et créez un compte
+
+### Configuration de Sentry dans Django :
+Dans votre fichier de configuration Django (habituellement settings.py), importez Sentry SDK et configurez-le avec votre DSN :
+```
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="votre_dsn_sentry",
+    integrations=[DjangoIntegration()],
+
+    # Activez l'envoi de l'environnement et des versions
+    send_default_pii=True
+)
+```
+
+## Les "Logger" de python :
+### Logger est un outil essentiel dans le développement de logiciels : 
+Il enregistre, surveille et analyse le comportement et les performances d'une application, ainsi que pour faciliter le débogage et garantir la conformité aux exigences de traçabilité.
+
+### Implémentation du Logger
+Notre projet utilise efficacement le module logging de Python, avec un logger configuré par logging.getLogger(__name__) dans chaque module. Cela permet de suivre facilement l'origine des logs et de diagnostiquer les problèmes, grâce à la distinction claire des sources des messages loggés.
+
+###Un exemple :Utilité du Logger en Gestion des Utilisateurs
+Le logger est crucial pour suivre les actions des utilisateurs dans votre système CRM. Il enregistre les activités telles que la création, la suppression, ou la mise à jour des utilisateurs, et les tentatives d'accès non autorisées. Cela améliore l'auditabilité des actions et est vital pour la sécurité et la conformité.
+
+### Rôle du Logger en Sécurité et Débogage
+Le logger joue un rôle clé dans la sécurité et le débogage de l'application. Il aide à identifier les problèmes de sécurité et les erreurs de fonctionnement, facilitant ainsi leur résolution rapide. Les logs détaillés accélèrent le processus de débogage et contribuent à la stabilité de l'application.
+
 
 ## Vérification & Contrôle du code avec flake8 :
 ```
 flake8 --format=html --htmldir=flake-report
 ```
+Puis visitez la page web qui est générée (index.html) dans le dossier /flake pour voir le rapport .
 
-
-## Powered by EL-WALID EL-KHABOU
+#### Powered by EL-WALID EL-KHABOU
 ```
 E-mail : ewek.dev@gmail.com
 ```

@@ -1,6 +1,7 @@
 ├── crm_events
 │   ├── crm_events
 │   │   ├── asgi.py
+│   │   ├── debug.log
 │   │   ├── settings.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
@@ -35,28 +36,24 @@
 │   │   ├── tests.py
 │   │   └── views.py
 │   │
-│   ├── tests (Total: 49 tests)
+│   ├── tests (49 tests au total)
 │   │   ├── clients  (07 tests)
 │   │   ├── contrats (18 tests)
 │   │   ├── events   (06 tests)
 │   │   └── users    (18 tests)
-│   │       
+│   │
+│   ├── main.py
 │   ├── debug.log
+│   ├── user_management.py
 │   ├── client_management.py
 │   ├── contract_management.py
 │   ├── event_management.py
-│   └── user_management.py
 │   ├── filtres.py
-│   ├── main.py
+│   ├── ma_bdd_backup.sql
 │   ├── manage.py
 │   ├── pytest.ini
-│   │requirements.txt
-│   │structure_de_ce_projet.txt
-│   │
-├── docs
-│   ├── Mission
-│   │   ├── 1.Mission.pdf
-│   │   ├── 2.Cahier-des-charges.pdf
-│   │   ├── 3.Guide-étapes-clés.pdf
-│   │   └── 4.Logique_du_Métier.pdf
-└── └── my_project.png
+├── README.md
+├── requirements.txt
+└── structure_de_ce_projet.txt
+
+13 directories, 63 files
