@@ -344,6 +344,9 @@ Le logger est crucial pour suivre les actions des utilisateurs dans votre systè
 ### Rôle du Logger en Sécurité et Débogage
 Le logger joue un rôle clé dans la sécurité et le débogage de l'application. Il aide à identifier les problèmes de sécurité et les erreurs de fonctionnement, facilitant ainsi leur résolution rapide. Les logs détaillés accélèrent le processus de débogage et contribuent à la stabilité de l'application.
 
+## Diagramme des relation entre les tables de ce projet :
+![Diagramme des relations dans la Bdd](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/my_project.png)
+
 
 ## Vérification & Contrôle du code avec flake8 :
 ```
