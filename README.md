@@ -10,8 +10,8 @@
 
 ## Technologies Utilisées
 
-- **Langage Principal**          : Python (Version 3.10.12)
-- **Framework Web**              : Django 4.2.7
+- **Langage Principal**          : Python (Version 3.11.7)
+- **Framework Web**              : Django 5.0
 - **Base de Données**            : PostgreSQL 14.9 (via psycopg2)
 - **Sécurité**                   : Bcrypt pour le hachage des mots de passe
 - **Gestion de Configuration**   : Django-environ, python-decouple, python-dotenv
@@ -47,11 +47,6 @@ L'équipe a dressé une liste de document pour cette mission :
 ### Voici La stucture actuelle et finale de ce projet :
 
 - **La stucture du projet**    : [La stucture du projet](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/structure_de_ce_projet.txt).
-
-
-
-### La base de données : 
-
 
 
 
@@ -142,8 +137,8 @@ SECRET_KEY="votre clé que python viens de générer"
 JWT_SECRET_KEY=daae87ae289ac5f6b89a0ffb0a82ee99cc1a1af95b0669e2
 DEBUG=True
 DB_NAME=crm_events
-DB_USER=Non_utilisateur_de_la_base_de_donnée_postgres
-DB_PASSWORD="un_password"
+DB_USER=Non_utilisateur_de_la_base_de_donnée_postgres   (par exemple = postgre)
+DB_PASSWORD="un_password_de_votre_choix"
 DB_HOST=localhost
 DB_PORT=5432
 ```
@@ -168,8 +163,52 @@ Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d
 Ce SuperUtilisateur aura accès à l'interface d'administration de Django et pourra gérer l'ensemble du site, ce qui inclut la capacité de créer, modifier et supprimer des utilisateurs, ainsi que d'effectuer d'autres tâches administratives.
 
 
+####################################################################################################################
+## Configuration de la Base de Données PostgreSQL
+Installer PostgreSQL :
+
+Assurez-vous d'avoir PostgreSQL installé sur votre système. Si ce n'est pas le cas, vous pouvez le télécharger depuis le site officiel de PostgreSQL et l'installer.
 
 
+### Création de la Base de Données :
+
+Ouvrez un terminal et connectez-vous à votre instance PostgreSQL avec l'utilisateur approprié (généralement "postgres") et il doit etre le meme que vous avez inserer dans le fichier .env:
+```
+sudo -u postgres psql
+```
+
+### Créez la base maintenant :
+une nouvelle base de données avec le nom spécifié dans votre fichier .env (par exemple, crm_events) :
+```
+CREATE DATABASE crm_events;
+```
+Si vous avez un message vous disant que cette base de donnée existe deja, cela veut dire que DJANGO a déja fait le boulot pour vous.
+
+Vous pouvez vérifier l'existance des données dans la base de donnée, par exemple via l'interface grafique de Django (Admin), si vous ne trouvez pas les données deja existants, restaurer la Base de Données à partir du Backup :
+
+### Restaurer la Base de Données à partir du Backup :
+
+Utilisez la sauvegarde ma_bdd_backup.sql disponible dans le dépôt GitHub pour restaurer les données dans la base de données nouvellement créée :
+```
+psql -U votre_nom_utilisateur_postgres -d crm_events -a -f ma_bdd_backup.sql
+```
+
+### Revérifiez bien les Variables d'Environnement :
+
+Assurez-vous que les informations de connexion à la base de données dans le fichier .env correspondent à la base de données PostgreSQL que vous venez de créer :
+DB_NAME : Le nom de la base de données doit correspondre à celui que vous avez créé.
+DB_USER : Le nom d'utilisateur PostgreSQL que vous avez utilisé pour la restauration de la sauvegarde.
+DB_PASSWORD : Le mot de passe de l'utilisateur PostgreSQL.
+
+
+### Exécuter les Migrations Django :
+
+Une fois que la base de données est configurée et restaurée, vous pouvez exécuter les migrations Django pour créer les tables nécessaires dans la base de données :
+```
+python manage.py makemigrations
+# puis
+python manage.py migrate
+```
 
 
 ## Avertissement de Sécurité : 
@@ -199,7 +238,6 @@ Les informations contenues dans le tableau suivant sont présentées uniquement 
 | TST         | tst1@epic-events.com      | Tests1234  | Test   | LETEST     |
 
 
-
 ### Démarrage du serveur :
 ```
 # assurez vous que vous etes toujours dans le dossier /crm_events, sinon 
@@ -219,12 +257,22 @@ http://127.0.0.1:8000/admin
 http://localhost:8000/admin
 ```
 
-#### Connectez vous en tant que SuperUtilisateur : 
+### Connectez vous en tant que SuperUtilisateur : 
 Remplissez les identifiants (E-mail et Password) avec les quels vous avez créé votre SuperUtilisateur, et validez.
 
 ![Vous verrez l'ecran suivant](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/log_in_admin.png)
 
-###########################################################################"
+
+## Démarrez le CLI : 
+
+Dans le dossier principale du projet : /crm_events, démarrez le projet avec la command suivante : 
+```
+python main.py
+```
+
+####################################################################################################"
+
+
 
 # Les tests : 
 Dans ce projet, plus de 58 tests en tout et pour tout ont été élaborés comme suit : 

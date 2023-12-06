@@ -256,9 +256,9 @@ def gerer_events(current_user):
         if current_user.department == 'GES':
             print("6. Filtrer les événements sans support")
 
-        print("7. Retourner au menu principal")
+        print("7. Retourner au menu principal\n")
 
-        choix = input("Choisissez une option: ")
+        choix = input("\033[96mChoisissez une option:\033[0m")
 
         if choix == '1':
             list_events(current_user)

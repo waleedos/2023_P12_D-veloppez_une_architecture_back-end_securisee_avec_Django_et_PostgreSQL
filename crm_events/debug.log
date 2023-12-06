@@ -1,3 +1,22 @@
 INFO 2023-12-06 02:57:51,073 user_management Action choisie par l'utilisateur : 7
 INFO 2023-12-06 02:57:51,073 user_management Retour au menu principal
 INFO 2023-12-06 02:58:01,361 main L'utilisateur a quitté l'application
+INFO 2023-12-06 10:48:28,125 main Démarrage de l'application
+INFO 2023-12-06 10:50:53,321 user_management Menu de gestion des utilisateurs affiché
+INFO 2023-12-06 10:51:21,617 user_management Action choisie par l'utilisateur : 7
+INFO 2023-12-06 10:51:21,617 user_management Retour au menu principal
+INFO 2023-12-06 10:51:27,049 client_management Accès à la gestion des clients par l'utilisateur: None
+INFO 2023-12-06 10:53:54,852 client_management Sortie de la gestion des clients
+INFO 2023-12-06 10:53:58,276 main L'utilisateur a quitté l'application
+INFO 2023-12-06 10:54:04,326 main Démarrage de l'application
+INFO 2023-12-06 10:56:50,993 user_management Tentative de connexion pour l'email : ges3@epic-events.com
+INFO 2023-12-06 10:56:51,390 user_management Utilisateur ges3@epic-events.com authentifié avec succès
+INFO 2023-12-06 10:56:55,322 contract_management Entrée dans la gestion des contrats par ges3@epic-events.com
+INFO 2023-12-06 10:57:18,026 contract_management Sortie de la gestion des contrats
+INFO 2023-12-06 11:06:40,105 contract_management Entrée dans la gestion des contrats par ges3@epic-events.com
+INFO 2023-12-06 11:08:23,525 contract_management Sortie de la gestion des contrats
+INFO 2023-12-06 11:08:25,589 main L'utilisateur a quitté l'application
+INFO 2023-12-06 11:08:36,405 main Démarrage de l'application
+INFO 2023-12-06 11:08:56,727 user_management Tentative de connexion pour l'email : ges3@epic-events.com
+INFO 2023-12-06 11:08:57,099 user_management Utilisateur ges3@epic-events.com authentifié avec succès
+INFO 2023-12-06 11:21:30,847 main L'utilisateur a quitté l'application

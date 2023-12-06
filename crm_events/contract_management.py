@@ -234,7 +234,7 @@ def gerer_contrats(current_user):
         print("7. Afficher les contrats non entièrement payés")
         print("8. Revenir au menu principal\n")
 
-        choix = input("\033[96mChoisissez une action: \033[0m")
+        choix = input("\033[96mChoisissez une action:\033[0m")
         if choix == '1':
             list_contrats(current_user)
         elif choix == '2':
