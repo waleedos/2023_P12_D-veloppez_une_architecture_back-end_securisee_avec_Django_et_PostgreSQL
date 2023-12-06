@@ -173,7 +173,10 @@ def list_clients():
 
 
 def update_client(current_user):
-    logger.info(f"Tentative de mise à jour d'un client par l'utilisateur: {current_user.email if current_user else 'None'}")
+    logger.info(
+        f"Tentative de mise à jour d'un client par l'utilisateur: "
+        f"{current_user.email if current_user else 'None'}"
+    )
 
     if not current_user or current_user.department not in ['COM', 'ADM']:
         logger.warning("Accès refusé pour la mise à jour du client - permissions insuffisantes")

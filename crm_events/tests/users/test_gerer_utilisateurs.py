@@ -23,7 +23,12 @@ def test_gerer_utilisateurs(capfd):
     )
 
     # Simuler les entrées de l'utilisateur pour différentes actions
-    with patch('builtins.input', side_effect=["1", "6", "ADM", "7"]):  # "1" pour afficher, "6" pour filtrer, "ADM" pour le code de département, "7" pour quitter
+    with patch('builtins.input', side_effect=[
+        "1",  # "1" pour afficher
+        "6",  # "6" pour filtrer
+        "ADM",  # "ADM" pour le code de département
+        "7"  # "7" pour quitter
+    ]):
         gerer_utilisateurs(current_authenticated_user)
 
     # Capturer la sortie

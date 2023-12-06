@@ -107,7 +107,10 @@ def list_events(current_user):
 
     if events.exists():
         table = PrettyTable()
-        table.field_names = [" ID ", " Nom ", " Début ", " Fin ", " Lieu ", " Type ", " Statut ", " Contrat ID ", " Gestionnaire "]
+        table.field_names = [
+            " ID ", " Nom ", " Début ", " Fin ", " Lieu ", " Type ",
+            " Statut ", " Contrat ID ", " Gestionnaire "
+        ]
         table.border = False
         table.header = True
         table.align = 'l'
@@ -206,7 +209,10 @@ def delete_event(current_user):
     try:
         event_id = input("Entrez l'ID de l'événement à supprimer : ").strip()
         evenement = Evenement.objects.get(id=event_id)
-        confirmation = input(f"Êtes-vous sûr de vouloir supprimer l'événement '{evenement.nom}' ? (oui/non) : ").strip().lower()
+        confirmation = input(
+            f"Êtes-vous sûr de vouloir supprimer l'événement '{evenement.nom}' ? "
+            "(oui/non) : "
+        ).strip().lower()
 
         if confirmation == 'oui':
             evenement.delete()

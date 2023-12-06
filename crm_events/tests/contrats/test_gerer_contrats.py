@@ -14,7 +14,10 @@ class GererContratsTest(TestCase):
         gerer_contrats(self.user)
         mock_list_contrats.assert_called_once_with(self.user)
 
-    @patch('builtins.input', side_effect=['2', 'nom_du_contrat', '1', 'montant_total', 'montant_restant', 'date_creation', 'ACT', '8'])
+    @patch('builtins.input', side_effect=[
+        '2', 'nom_du_contrat', '1', 'montant_total', 'montant_restant',
+        'date_creation', 'ACT', '8'
+    ])
     @patch('contract_management.create_contrat')
     def test_redirect_to_create_contrat(self, mock_create_contrat, mock_input):
         gerer_contrats(self.user)

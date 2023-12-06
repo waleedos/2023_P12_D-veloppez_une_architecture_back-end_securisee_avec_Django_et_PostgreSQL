@@ -123,7 +123,8 @@ def validate_phone_number(phone_number):
         raise ValueError("Format de numéro de téléphone invalide.")
 
 
-def create_user(email=None, password=None, first_name=None, last_name=None, phone_number=None, department=None):
+def create_user(email=None, password=None, first_name=None, last_name=None,
+                phone_number=None, department=None):
     logger = logging.getLogger(__name__)
     logger.info("Début de la création d'un nouvel utilisateur")
 
@@ -134,24 +135,33 @@ def create_user(email=None, password=None, first_name=None, last_name=None, phon
         print("\n\033[91mVous devez être connecté pour créer un utilisateur.\033[0m\n")
         return
 
-    if not current_authenticated_user.is_superuser and current_authenticated_user.department not in ['ADM', 'GES']:
-        logger.warning(f"Tentative de création d'utilisateur par {current_authenticated_user.email} sans accréditation suffisante")
-        print("\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir créer un utilisateur.\033[0m\n")
+    if not current_authenticated_user.is_superuser and \
+       current_authenticated_user.department not in ['ADM', 'GES']:
+        logger.warning(
+            f"Tentative de création d'utilisateur par {current_authenticated_user.email} "
+            "sans accréditation suffisante"
+        )
+        print(
+            "\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir "
+            "créer un utilisateur.\033[0m\n"
+        )
         return
 
     try:
-        # Utiliser des entrées directes si elles sont fournies, sinon utiliser input()
         email = email or input_with_prompt("Entrez l'email du nouvel utilisateur : ")
         validate_email(email)
-
         password = password or input_with_prompt("Entrez le mot de passe du nouvel utilisateur : ")
         first_name = first_name or input_with_prompt("Entrez le prénom du nouvel utilisateur : ")
         validate_name(first_name)
         last_name = last_name or input_with_prompt("Entrez le nom de famille du nouvel utilisateur : ")
         validate_name(last_name)
-        phone_number = phone_number or input_with_prompt("Entrez le numéro de téléphone du nouvel utilisateur : ")
+        phone_number = phone_number or input_with_prompt(
+            "Entrez le numéro de téléphone du nouvel utilisateur : "
+        )
         validate_phone_number(phone_number)
-        department = department or input_with_prompt("Entrez le département du nouvel utilisateur (COM/SUP/GES/ADM/TST) : ")
+        department = department or input_with_prompt(
+            "Entrez le département du nouvel utilisateur (COM/SUP/GES/ADM/TST) : "
+        )
 
         validate_and_create_user(email, password, first_name, last_name, phone_number, department)
         logger.info(f"Utilisateur {email} créé avec succès")
@@ -316,19 +326,23 @@ def delete_user(requesting_user_email, user_to_delete_email):
         requesting_user = Utilisateur.objects.get(email=requesting_user_email)
         user_to_delete = Utilisateur.objects.get(email=user_to_delete_email)
 
-        # Vérifier si l'utilisateur qui fait la demande a les permissions nécessaires
         if not (requesting_user.is_superuser or requesting_user.department in ['ADM', 'GES']):
-            logger.warning(f"Tentative de suppression de l'utilisateur {user_to_delete_email} refusée pour {requesting_user_email}")
+            logger.warning(
+                f"Tentative de suppression de l'utilisateur {user_to_delete_email} "
+                f"refusée pour {requesting_user_email}"
+            )
             raise PermissionDenied(
-                "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire pour supprimer cet utilisateur.\n"
+                "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
+                "pour supprimer cet utilisateur.\n"
             )
 
-        # Supprimer l'utilisateur
         user_to_delete.delete()
         logger.info(f"Utilisateur {user_to_delete_email} supprimé par {requesting_user_email}")
         print(f"\033[92mUtilisateur {user_to_delete_email} supprimé avec succès.\033[0m\n")
     except Utilisateur.DoesNotExist:
-        logger.error(f"Utilisateur {user_to_delete_email} ou demandeur {requesting_user_email} non trouvé")
+        logger.error(
+            f"Utilisateur {user_to_delete_email} ou demandeur {requesting_user_email} non trouvé"
+        )
         print("\033[91mUtilisateur non trouvé.\033[0m\n")
     except PermissionDenied as e:
         print(f"\033[91m{e}\033[0m\n")
@@ -344,27 +358,42 @@ def validate_department(department):
 
 
 def reassign_user(email, new_department, current_user_email):
-    logger.info(f"Tentative de réaffectation de l'utilisateur : {email} au département : {new_department}")
+    logger.info(
+        f"Tentative de réaffectation de l'utilisateur : {email} au département : {new_department}"
+    )
 
     try:
         current_user = Utilisateur.objects.get(email=current_user_email)
         if not current_user.is_superuser and current_user.department != 'ADM':
-            logger.warning(f"Accès refusé pour la réaffectation par l'utilisateur : {current_user_email}")
-            print("\033[91mAccès refusé. Seuls les superutilisateurs ou les utilisateurs du département ADM peuvent réaffecter des utilisateurs.\033[0m\n")
+            logger.warning(
+                f"Accès refusé pour la réaffectation par l'utilisateur : {current_user_email}"
+            )
+            print(
+                "\033[91mAccès refusé. Seuls les superutilisateurs ou les utilisateurs du "
+                "département ADM peuvent réaffecter des utilisateurs.\033[0m\n"
+            )
             return
 
         user = Utilisateur.objects.get(email=email)
         validate_department(new_department)  # Valider le nouveau département
         user.department = new_department
         user.save()
-        logger.info(f"Utilisateur {email} réaffecté avec succès au département {new_department}")
-        print(f"\033[92mUtilisateur {email} ré-affecté au département {new_department}.\033[0m\n")
+        logger.info(
+            f"Utilisateur {email} réaffecté avec succès au département {new_department}"
+        )
+        print(
+            f"\033[92mUtilisateur {email} ré-affecté au département {new_department}.\033[0m\n"
+        )
     except Utilisateur.DoesNotExist:
         logger.error(f"Utilisateur non trouvé pour l'email : {email}")
         print("\033[91mAucun utilisateur trouvé avec cet email.\033[0m\n")
     except ValueError as e:
-        logger.error(f"Erreur de validation lors de la réaffectation de l'utilisateur : {e}")
-        print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
+        logger.error(
+            f"Erreur de validation lors de la réaffectation de l'utilisateur : {e}"
+        )
+        print(f"\n\033[91mErreur de validation : {e}\033[0m\n")
     except Exception as e:
-        logger.error(f"Erreur inattendue lors de la réaffectation de l'utilisateur : {e}")
-        print(f"Erreur lors de la ré-affectation de l'utilisateur : {e}")
+        logger.error(
+            f"Erreur inattendue lors de la réaffectation de l'utilisateur : {e}"
+        )
+        print(f"\033[91mErreur lors de la ré-affectation de l'utilisateur : {e}\033[0m\n")

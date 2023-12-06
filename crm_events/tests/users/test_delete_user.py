@@ -28,4 +28,8 @@ def test_delete_user_permission_denied(capfd):
     with patch('epic_auth_app.models.Utilisateur.objects.get', side_effect=[mock_requesting_user, mock_user_to_delete]):
         delete_user("nonadminuser@example.com", "user@example.com")
         captured = capfd.readouterr()
-        assert "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire pour supprimer cet utilisateur.\n" in captured.out
+        expected_msg = (
+            "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
+            "pour supprimer cet utilisateur.\n"
+        )
+        assert expected_msg in captured.out

@@ -100,7 +100,10 @@ def list_contrats(current_user):
             table.align = 'l'
 
             for contrat in contrats:
-                commercial_assigne = contrat.client.commercial_assigne.get_full_name() if contrat.client.commercial_assigne else 'N/A'
+                commercial_assigne = (
+                    contrat.client.commercial_assigne.get_full_name()
+                    if contrat.client.commercial_assigne else 'N/A'
+                )
                 table.add_row([
                     " " + str(contrat.id) + " ",
                     " " + contrat.nom + " ",
@@ -181,8 +184,11 @@ def reassign_contrat(user, contrat_id):
     logger = logging.getLogger(__name__)
 
     if user.department not in ['GES', 'ADM']:
-        logger.warning(f"Utilisateur non autorisé {user.email} a tenté de réaffecter le contrat {contrat_id}")
-        print("\033[91mSeules les personnes appartenant aux équipes de gestion et administration peuvent réaffecter un contrat.\033[0m")
+        logger.warning(f"Utilisateur non autorisé {user.email} a tenté de réaffecter "
+                       f"le contrat {contrat_id}")
+        warning_msg = ("\033[91mSeules les personnes appartenant aux équipes de "
+                       "gestion et administration peuvent réaffecter un contrat.\033[0m")
+        print(warning_msg)
         return
 
     try:
@@ -205,8 +211,13 @@ def delete_contrat(user, contrat_id):
     logger = logging.getLogger(__name__)
 
     if user.department not in ['GES', 'ADM']:
-        logger.warning(f"Utilisateur non autorisé {user.email} a tenté de supprimer le contrat {contrat_id}")
-        print("\033[91mSeules les personnes des équipes de gestion et administration peuvent supprimer un contrat.\033[0m")
+        logger.warning(
+            f"Utilisateur non autorisé {user.email} a tenté de supprimer le contrat {contrat_id}"
+        )
+        print(
+            "\033[91mSeules les personnes des équipes de gestion et administration "
+            "peuvent supprimer un contrat.\033[0m"
+        )
         return
 
     try:

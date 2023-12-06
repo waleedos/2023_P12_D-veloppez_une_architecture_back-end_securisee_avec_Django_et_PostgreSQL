@@ -111,7 +111,10 @@ def afficher_contrats(contrats):
     table.align = 'l'
 
     for contrat in contrats:
-        commercial_assigne = contrat.client.commercial_assigne.get_full_name() if contrat.client.commercial_assigne else 'N/A'
+        commercial_assigne = (
+            contrat.client.commercial_assigne.get_full_name()
+            if contrat.client.commercial_assigne else 'N/A'
+        )
         table.add_row([
             " " + str(contrat.id) + " ",
             " " + contrat.nom + " ",
