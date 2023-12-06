@@ -168,6 +168,38 @@ Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d
 Ce SuperUtilisateur aura accès à l'interface d'administration de Django et pourra gérer l'ensemble du site, ce qui inclut la capacité de créer, modifier et supprimer des utilisateurs, ainsi que d'effectuer d'autres tâches administratives.
 
 
+
+
+
+
+## Avertissement de Sécurité : 
+Les informations contenues dans le tableau suivant sont présentées uniquement à des fins de démonstration et de test. Dans un environnement de production réel, il est fortement déconseillé de stocker ou de partager des informations sensibles de cette manière, en raison des risques évidents de sécurité et de confidentialité. Ce tableau est mis en ligne dans ce format spécifique pour faciliter la tâche des utilisateurs souhaitant tester et évaluer ce projet. Veuillez vous assurer de traiter toutes les données sensibles avec les précautions de sécurité adéquates dans vos applications.
+
+| Département | Utilisateur               | Password   | Prénom | Nom        |
+|-------------|---------------------------|------------|--------|------------|
+| ADM         | adm2@epic-events.com      | Base1234   | Adam   | SMITH      |
+| ADM         | adm3@epic-events.com      | Base9876   | Pamela | ANDERSON   |
+|             |                           |            |        |            |
+| GES         | ges1@epic-events.com      | Bigar1234  | Romin  | LEFEBRE    |
+| GES         | ges2@epic-events.com      | Bagar9876  | Amelie | DUPON      |
+| GES         | ges3@epic-events.com      | Base1234   | Bruno  | RUDFORD    |
+| GES         | ges4@epic-events.com      | Base9876   | Nancie | COUREL     |
+|             |                           |            |        |            |
+| COM         | com1@epic-events.com      | Arizon1234 | Julien | ABRON      |
+| COM         | com2@epic-events.com      | AriZon9876 | Lucette| GHORBAL    |
+| COM         | com3@epic-events.com      | Arnold8877 | Jean   | BERNARD    |
+| COM         | com4@epic-events.com      | Ardise6565 | Katia  | KAMOVICH   |
+| COM         | com5@epic-events.com      | Base2345   | Abdel  | FOURATI    |
+|             |                           |            |        |            |
+| SUP         | sup1@epic-events.com      | Crypto8787 | Ahmed  | KHALIF     |
+| SUP         | sup2@epic-events.com      | Crypto9898 | Simone | RENARD     |
+| SUP         | sup3@epic-events.com      | Crypos0123 | Velery | JUDON      |
+| SUP         | sup4@epic-events.com      | Crypos5678 | Malik  | CHANTAL    |
+|             |                           |            |        |            |
+| TST         | tst1@epic-events.com      | Tests1234  | Test   | LETEST     |
+
+
+
 ### Démarrage du serveur :
 ```
 # assurez vous que vous etes toujours dans le dossier /crm_events, sinon 
