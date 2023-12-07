@@ -157,7 +157,7 @@ Lorsque vous exécutez cette commande, Django vous demandera de fournir un nom d
 - e-mail : admin@admin.com
 - Prénom : admin
 - Nom : admin
-- Passwor: votre mots de pass
+- Passwor: votre mots de passe
 
 Ce SuperUtilisateur aura accès à l'interface d'administration de Django et pourra gérer l'ensemble du site, ce qui inclut la capacité de créer, modifier et supprimer des utilisateurs, ainsi que d'effectuer d'autres tâches administratives.
 
@@ -301,7 +301,7 @@ pytest tests/users/
 ```
 pytest tests/users/
 ```
-
+![Resultats de Pytest](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/resultats-pytest.png)
 ### Execution globale de tous les tests :
 ```
 pytest

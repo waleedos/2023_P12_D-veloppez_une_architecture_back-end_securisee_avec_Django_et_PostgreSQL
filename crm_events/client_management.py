@@ -96,7 +96,7 @@ def add_client(current_user):
 
     if not current_user or current_user.department != 'COM':
         logger.warning("Accès refusé à l'ajout de client - utilisateur non autorisé")
-        print("\033[91mAccès refusé. Seuls les membres de l'équipe commerciale peuvent ajouter des clients.\033[0m")
+        print("\n\033[91mAccès refusé. Seuls les membres de l'équipe commerciale peuvent ajouter des clients.\033[0m")
         return
 
     try:

@@ -224,7 +224,7 @@ def delete_contrat(user, contrat_id):
         contrat = Contrat.objects.get(id=contrat_id)
         contrat.delete()
         logger.info(f"Contrat {contrat_id} supprimé avec succès par {user.email}")
-        print(f"Contrat {contrat_id} supprimé avec succès.")
+        print(f"\n\033[92mContrat {contrat_id} supprimé avec succès.\033\n[0m")
     except Contrat.DoesNotExist:
         logger.error(f"Tentative de suppression d'un contrat inexistant: {contrat_id}")
         print("\033[91mContrat non trouvé.\033[0m")

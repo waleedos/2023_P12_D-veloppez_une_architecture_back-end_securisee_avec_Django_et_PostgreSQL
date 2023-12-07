@@ -40,7 +40,7 @@ def main_menu():
     global current_authenticated_user
 
     while True:
-        print_menu_header("Bienvenue dans l'application CRM Epic Events", 60)
+        print_menu_header("Bienvenue dans CRM Epic Events", 34)
         print("1. Login")
         print("2. Logout")
         print("3. Gérer les Utilisateurs")

@@ -62,7 +62,8 @@ def gerer_utilisateurs(current_authenticated_user):
         elif user_action == '6':
             logger.info("Option choisie : Filtrer les utilisateurs par Département")
             print("Choisissez un département pour filtrer :")
-            print("ADM - Administration, GES - Gestion, COM - Commercial, SUP - Support, AUT - Autres")
+            print("\n\033[33mADM - Administration / GES - Gestion / "
+                  "COM - Commercial / SUP - Support / AUT - Autres\n\033[0m")
             departement_code = input("Entrez le code du département : ")
             utilisateurs = filtrer_utilisateurs_par_departement(departement_code)
             afficher_utilisateurs(utilisateurs)
@@ -142,7 +143,7 @@ def create_user(email=None, password=None, first_name=None, last_name=None,
             "sans accréditation suffisante"
         )
         print(
-            "\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir "
+            "\n\033[91mVous n'avez pas le niveau d'accréditation ADM ou GES pour pouvoir "
             "créer un utilisateur.\033[0m\n"
         )
         return
@@ -229,7 +230,7 @@ def update_user(current_user, user_to_update_email):
             user_to_update.phone = new_phone
 
         user_to_update.save()
-        print("\033[92mUtilisateur mis à jour.\033\n[0m\n")
+        print("\n\033[92mUtilisateur mis à jour.\033\n[0m\n")
 
     except ValueError as e:
         print(f"\n\033[91mErreur de validation : {e}\033\n[0m")
@@ -332,13 +333,14 @@ def delete_user(requesting_user_email, user_to_delete_email):
                 f"refusée pour {requesting_user_email}"
             )
             raise PermissionDenied(
-                "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
+                "\n\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
                 "pour supprimer cet utilisateur.\n"
             )
 
         user_to_delete.delete()
         logger.info(f"Utilisateur {user_to_delete_email} supprimé par {requesting_user_email}")
-        print(f"\033[92mUtilisateur {user_to_delete_email} supprimé avec succès.\033[0m\n")
+        print(f"\n\033[92mUtilisateur {user_to_delete_email} supprimé avec succès.\033\n[0m")
+
     except Utilisateur.DoesNotExist:
         logger.error(
             f"Utilisateur {user_to_delete_email} ou demandeur {requesting_user_email} non trouvé"
@@ -369,7 +371,7 @@ def reassign_user(email, new_department, current_user_email):
                 f"Accès refusé pour la réaffectation par l'utilisateur : {current_user_email}"
             )
             print(
-                "\033[91mAccès refusé. Seuls les superutilisateurs ou les utilisateurs du "
+                "\n\033[91mAccès refusé. Seuls les superutilisateurs ou les utilisateurs du "
                 "département ADM peuvent réaffecter des utilisateurs.\033[0m\n"
             )
             return

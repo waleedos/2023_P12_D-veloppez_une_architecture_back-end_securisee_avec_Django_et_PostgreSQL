@@ -40,6 +40,6 @@ def test_add_client_access_denied(mock_current_user):
                 add_client(mock_current_user)
 
                 # Vérifier que le bon message a été imprimé
-                expected_msg = ("\033[91mAccès refusé. Seuls les membres de l'équipe commerciale "
+                expected_msg = ("\n\033[91mAccès refusé. Seuls les membres de l'équipe commerciale "
                                 "peuvent ajouter des clients.\033[0m")
                 mock_print.assert_called_with(expected_msg)

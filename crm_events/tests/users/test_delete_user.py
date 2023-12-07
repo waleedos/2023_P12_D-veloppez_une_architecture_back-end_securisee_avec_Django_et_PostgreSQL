@@ -29,7 +29,7 @@ def test_delete_user_permission_denied(capfd):
         delete_user("nonadminuser@example.com", "user@example.com")
         captured = capfd.readouterr()
         expected_msg = (
-            "\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
+            "\n\033[91mVous n'avez pas le niveau d'accréditation (ADM ou GES), nécessaire "
             "pour supprimer cet utilisateur.\n"
         )
         assert expected_msg in captured.out
