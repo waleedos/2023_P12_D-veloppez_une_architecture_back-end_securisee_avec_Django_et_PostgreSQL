@@ -301,11 +301,12 @@ pytest tests/users/
 ```
 pytest tests/users/
 ```
-![Resultats de Pytest](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/resultats-pytest.png)
+
 ### Execution globale de tous les tests :
 ```
 pytest
 ```
+![Resultats de Pytest](https://github.com/waleedos/2023_P12_D-veloppez_une_architecture_back-end_securisee_avec_Django_et_PostgreSQL/blob/main/docs/photo/resultats-pytest.png)
 
 ## La journalisation totale avec "Sentry" :
 Sentry est un service de suivi des erreurs qui permet de consigner, de surveiller et de résoudre les problèmes dans les applications en temps réel, et cela implique la consignation et le suivi des événements qui se produisent lors de l'exécution de l'application.
