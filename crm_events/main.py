@@ -1,26 +1,31 @@
+# Importation des modules nécessaires
 import os
 import django
 import logging
 import sentry_sdk
 
-# Configuration de l'environnement Django
+# Configuration de l'environnement Django en définissant le module de paramètres
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crm_events.settings')
+# Initialisation de Django pour assurer la configuration correcte
 django.setup()
 
-
+# Configuration du logger pour enregistrer les informations de l'application
 logger = logging.getLogger(__name__)
 
-
+# Bloc exécuté si le script est le point d'entrée principal
 if __name__ == "__main__":
+    # Enregistrement d'un message d'information au démarrage de l'application
     logger.info("Démarrage de l'application")
 
-
+# Initialisation de Sentry SDK pour le suivi des erreurs et la surveillance de l'application
 sentry_sdk.init(
+    # Définition de la Data Source Name (DSN) pour Sentry
     dsn="https://06c9f2cd3ff6e7691aa2488eacbbf2b9@o4506331927609344.ingest.sentry.io/4506331936587776",
+    # Définition du taux d'échantillonnage pour la collecte des traces
     traces_sample_rate=1.0
 )
 
-# Importations après la configuration de Django
+# Importations de modules spécifiques après la configuration de Django
 import user_management as um                    # noqa: E402
 import client_management as cm                  # noqa: E402
 from contract_management import gerer_contrats  # noqa: E402
@@ -30,17 +35,23 @@ from event_management import gerer_events       # noqa: E402
 current_authenticated_user = None
 
 
+# Définition d'une fonction pour afficher l'en-tête du menu
 def print_menu_header(title, width=50):
-    print("\033[93m" + '╔' + '═' * (width - 2) + '╗' + "\033[0m")  # En-tête avec couleur verte
+    # Affichage de l'en-tête avec une bordure et un titre centré, avec une couleur jaune
+    print("\033[93m" + '╔' + '═' * (width - 2) + '╗' + "\033[0m")  # En-tête avec couleur jaune
     print("\033[93m║" + title.center(width - 2) + "║\033[0m")
     print("\033[93m" + '╚' + '═' * (width - 2) + '╝' + "\033[0m")
 
 
+# Définition de la fonction principale pour afficher le menu de l'application
 def main_menu():
-    global current_authenticated_user
+    global current_authenticated_user   # Référence à la variable globale
 
+    # Boucle infinie pour maintenir le menu actif
     while True:
-        print_menu_header("Bienvenue dans CRM Epic Events", 34)
+        # Appel de la fonction pour afficher l'en-tête du menu
+        print_menu_header("Bienvenue dans l'application CRM Epic Events", 50)
+        # Affichage des options du menu
         print("1. Login")
         print("2. Logout")
         print("3. Gérer les Utilisateurs")
@@ -51,11 +62,15 @@ def main_menu():
         print("8. Journalisation et Suivi")
         print("9. Quitter")
 
+        # Collecte du choix de l'utilisateur
         choice = input("\033[34m\nEntrez votre choix: \033[0m")
 
+        # Traitement des différentes options du menu
         if choice == '1':
+            # Connexion et mise à jour de l'utilisateur actuel
             current_authenticated_user = um.login(show_token=False)
         elif choice == '2':
+            # Déconnexion de l'utilisateur
             um.logout()
             current_authenticated_user = None
         elif choice == '3':
