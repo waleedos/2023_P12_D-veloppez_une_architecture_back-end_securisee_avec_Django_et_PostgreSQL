@@ -53,6 +53,8 @@ def gerer_utilisateurs(current_authenticated_user):
         elif user_action == '4':
             logger.info("Option choisie : Réaffecter un Utilisateur")
             email_to_reassign = input("Entrez l'email de l'utilisateur à réaffecter : ")
+            print("\n\033[33mADM - Administration / GES - Gestion / "
+                  "COM - Commercial / SUP - Support / TST - TEST\n\033[0m")
             new_department = input("Entrez le nouveau département : ")
             reassign_user(email_to_reassign, new_department, current_authenticated_user.email)
         elif user_action == '5':
@@ -411,21 +413,17 @@ def validate_department(department):
 
 def reassign_user(email, new_department, current_user_email):
     # Réaffecter un utilisateur à un nouveau département
-    logger.info(
-        f"Tentative de réaffectation de l'utilisateur : {email} au département : {new_department}"
-    )
+    logger.info(f"Tentative de réaffectation de l'utilisateur : {email} au département : {new_department}")
 
     try:
         # Récupérer les informations de l'utilisateur actuel
         current_user = Utilisateur.objects.get(email=current_user_email)
-        # Vérifier si l'utilisateur actuel a les permissions nécessaires
-        if not current_user.is_superuser and current_user.department != 'ADM':
-            logger.warning(
-                f"Accès refusé pour la réaffectation par l'utilisateur : {current_user_email}"
-            )
+        # Vérifier si l'utilisateur actuel est un superutilisateur ou a les permissions nécessaires
+        if not (current_user.is_superuser or current_user.department in ['GES', 'ADM']):
+            logger.warning(f"Accès refusé pour la réaffectation par l'utilisateur : {current_user_email}")
             print(
                 "\n\033[91mAccès refusé. Seuls les superutilisateurs ou les utilisateurs du "
-                "département ADM peuvent réaffecter des utilisateurs.\033[0m\n"
+                "département ADM et GES peuvent réaffecter des utilisateurs.\033[0m\n"
             )
             return
 
@@ -438,7 +436,7 @@ def reassign_user(email, new_department, current_user_email):
         )
         # Afficher un message de confirmation
         print(
-            f"\033[92mUtilisateur {email} ré-affecté au département {new_department}.\033[0m\n"
+            f"\n\033[92mUtilisateur {email} ré-affecté au département {new_department}.\033[0m\n"
         )
     except Utilisateur.DoesNotExist:
         # Gérer le cas où l'utilisateur n'existe pas
