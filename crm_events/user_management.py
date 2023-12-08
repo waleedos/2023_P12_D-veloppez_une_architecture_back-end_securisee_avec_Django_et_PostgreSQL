@@ -367,7 +367,7 @@ def delete_user(requesting_user_email, user_to_delete_email):
         requesting_user = Utilisateur.objects.get(email=requesting_user_email)
         user_to_delete = Utilisateur.objects.get(email=user_to_delete_email)
 
-        # Vérifier si l'utilisateur demandeur a les autorisations nécessaires
+        # Vérifier si l'utilisateur qui a fait la demande a les autorisations nécessaires
         if not (requesting_user.is_superuser or requesting_user.department in ['ADM', 'GES']):
             # Logger un avertissement en cas de permissions insuffisantes
             logger.warning(
